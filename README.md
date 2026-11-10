@@ -16,17 +16,15 @@ classDiagram
   class DigitalGame
 
   Store "1" --> "" VideoGame
-
   Store "1" --> "" Inventary
-
   Store "1" --> "" Category
-
   Store "1" --> "" Sale
   Store "1" --> "" Employee
   Store "1" --> "" Customer
   Store "1" --> "" Receipt
   Store "1" --> "" PhysicalGame
   Store "1" --> "" DigitalGame
+
 
 
   
