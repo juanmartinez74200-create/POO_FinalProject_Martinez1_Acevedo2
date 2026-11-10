@@ -3,7 +3,7 @@
 DIAGRAMA DE CLASES
 ```mermaid
 classDiagram
-  direction TB
+  direction LR
   class Store
   class VideoGame
   class Inventary
