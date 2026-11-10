@@ -1,4 +1,4 @@
-# POO_FinalProject_Martinez1_Acevedo2
+2# POO_FinalProject_Martinez1_Acevedo2
 
 DIAGRAMA DE CLASES
 ```mermaid
@@ -16,8 +16,11 @@ classDiagram
   class DigitalGame
 
   Store "1" --> "" VideoGame
+
   Store "1" --> "" Inventary
+
   Store "1" --> "" Category
+
   Store "1" --> "" Sale
   Store "1" --> "" Employee
   Store "1" --> "" Customer
