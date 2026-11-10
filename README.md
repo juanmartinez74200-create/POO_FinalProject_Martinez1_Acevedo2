@@ -25,7 +25,26 @@ classDiagram
   Store "1" --> "0..*" PhysicalGame
   Store "1" --> "0..*" DigitalGame
 
+  VideoGame "1" --> "0..*" DigitalGame
+  VideoGame "1" --> "0..*" PhysicalGame
+  VideoGame "1" --> "0..*" Sale
 
+  Category "1" --> "0..*" DigitalGame
+  Category "1" --> "0..*" PhysicalGame
+  Category "1" --> "0..*" Sales
+
+  Inventary "1" --> "0..*" VideoGame
+  Inventary "1" --> "0..*" Sale
+  Inventary "1" --> "0..*" Receipt
+
+  Sale "1" --> "1" Receipt
+
+  Customer "1" --> "0..*" Receipt
+
+  Employee "1" --> "0..*" Sale
+
+
+  
 
 
 
