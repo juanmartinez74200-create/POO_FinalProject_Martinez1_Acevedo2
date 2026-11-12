@@ -1,6 +1,10 @@
 2# POO_FinalProject_Martinez1_Acevedo2
 
+Integrantes del grupo:
+Juan Andrés Martínez Gutierrez(74200)
+Yarany Acevedo (74012)
 DIAGRAMA DE CLASES
+
 ```mermaid
 classDiagram
   direction LR
