@@ -7,6 +7,21 @@ public class Store {
     private int id;
     private ArrayList<Sale>sales;
 
+    //getters y setters
+
+    public int getId(){
+        return id;
+    }
+    public void setId(int id){
+        this.id=id;
+    }
+    public static String getStoreName(){
+        return storeName;
+    }
+     public static void setStoreName(String storeName) {
+        Store.storeName = storeName;
+    }
+
     public void registerVideoGame(){};
     public void SearchVideoGame(){};
     public void listVideoGame(){};
