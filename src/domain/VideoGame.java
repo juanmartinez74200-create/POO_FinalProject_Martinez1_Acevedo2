@@ -8,7 +8,37 @@ public abstract class VideoGame {
     private float basePrice;
     private boolean activate;
 
+    protected enum Plataform {
+        NINTENDO,
+        PC,
+        XBOX,
+        PLAYSTATION
+    }
+
+    private Plataform plataform;
+
+    // constructor
+    public VideoGame(int gameId, String title, String developer, int releaseYear, float basePrice, Plataform plataform,
+            boolean activate) {
+        setGameId(gameId);
+        setGameId(gameId);
+        setTitle(title);
+        setDeveloper(developer);
+        setReleaseYear(releaseYear);
+        setBasePrice(basePrice);
+        setPlataform(plataform);
+        setActivate(activate);
+    }
+
     // getters y setters
+    public Plataform getPlataform() {
+        return plataform;
+    }
+
+    public void setPlataform(Plataform plataform) {
+        this.plataform = plataform;
+    }
+
     public int getGameId() {
         return gameId;
     }
@@ -29,7 +59,7 @@ public abstract class VideoGame {
         return developer;
     }
 
-    public void setDeveloper(String ddeveloper) {
+    public void setDeveloper(String developer) {
         this.developer = developer;
     }
 
@@ -56,8 +86,10 @@ public abstract class VideoGame {
     public void setActivate(boolean activate) {
         this.activate = activate;
     }
+    // metodos
+
     public abstract float calculateSellingPrice();
+
     public abstract String gameFormat();
-    
 
 }
