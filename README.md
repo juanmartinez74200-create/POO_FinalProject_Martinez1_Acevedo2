@@ -41,11 +41,10 @@ classDiagram
   Inventary "1" --> "0..*" Sale
   Inventary "1" --> "0..*" Receipt
 
-  Sale "1" --> "1" Receipt
+  Sale "1" --> "1" Employee
+  Sale "1" --> "1" Customer
 
-  Customer "1" --> "0..*" Receipt
-
-  Employee "1" --> "0..*" Sale
+  Receipt "1" --> "1" Sale
 
 
   
