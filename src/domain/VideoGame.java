@@ -1,7 +1,7 @@
 package domain;
 
 public abstract class VideoGame {
-    private int gameId;
+    private int id;
     private String title;
     private String developer;
     private int releaseYear;
@@ -18,16 +18,16 @@ public abstract class VideoGame {
     private Plataform plataform;
 
     // constructor
-    public VideoGame(int gameId, String title, String developer, int releaseYear, float basePrice, Plataform plataform,
+    public VideoGame(int id, String title, String developer, int releaseYear, float basePrice, Plataform plataform,
             boolean activate) {
-        setGameId(gameId);
-        setGameId(gameId);
+        setId(id);
         setTitle(title);
         setDeveloper(developer);
         setReleaseYear(releaseYear);
-        setBasePrice(basePrice);
+        setBasePrice(calculateBasePrice());
         setPlataform(plataform);
         setActivate(activate);
+    
     }
 
     // getters y setters
@@ -39,12 +39,12 @@ public abstract class VideoGame {
         this.plataform = plataform;
     }
 
-    public int getGameId() {
-        return gameId;
+    public int getId() {
+        return id;
     }
 
-    public void setGameId(int gameId) {
-        this.gameId = gameId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -90,6 +90,18 @@ public abstract class VideoGame {
 
     public abstract float calculateSellingPrice();
 
-    public abstract String gameFormat();
+    public int calculateBasePrice() {
+        if (plataform == Plataform.NINTENDO) {
+            return 165000;
+        } else if (plataform == Plataform.PC) {
+            return 172000;
+        } else if (plataform == Plataform.PLAYSTATION) {
+            return 135000;
+        } else if (plataform == Plataform.XBOX) {
+            return 150000;
+        }
+        throw new IllegalArgumentException("plataforma de videojuego no registrada");
 
+    }
+    public abstract String gameFormat();
 }

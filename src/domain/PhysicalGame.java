@@ -5,9 +5,9 @@ public class PhysicalGame extends VideoGame {
     private String condition;
 
     // constructor de la clase
-    public PhysicalGame(int gameId, String title, String developer, int releaseYear, float basePrice,
+    public PhysicalGame(int Id, String title, String developer, int releaseYear, float basePrice,
             Plataform plataform, boolean activate, int stock, String condition) {
-        super(gameId, title, developer, releaseYear, basePrice, plataform, activate);
+        super(Id, title, developer, releaseYear, basePrice, plataform, activate);
         setStock(stock);
         setCondition(condition);
     }
@@ -35,4 +35,8 @@ public class PhysicalGame extends VideoGame {
     public void decreaseStock() {
     };
 
+    @Override 
+    public float calculateSellingPrice(){};
+
+    public String gameFormat(){};
 }
