@@ -3,13 +3,25 @@
 Integrantes del grupo:
 Juan Andrés Martínez Gutierrez(74200)
 Yarany Acevedo (74012)
+
+INFORMACION ACERCA DE EL PROYECTO
+
 DIAGRAMA DE CLASES
 
 ```mermaid
 classDiagram
   direction LR
   class Store
-  class VideoGame
+  class VideoGame{
+        -int id;
+        -String title;
+        -float developer;
+        -int releaseYear;
+        -float basePrice;
+        -boolean activate;
+        -Plataform plataform
+  }
+
   class Inventary
   class Category
   class Sale
@@ -29,8 +41,8 @@ classDiagram
   Store "1" --> "0..*" PhysicalGame
   Store "1" --> "0..*" DigitalGame
 
-  VideoGame "1" --> "0..*" DigitalGame
-  VideoGame "1" --> "0..*" PhysicalGame
+  VideoGame <|-- DigitalGame
+  VideoGame <|-- PhysicalGame
   VideoGame "1" --> "0..*" Sale
 
   Category "1" --> "0..*" DigitalGame
