@@ -2,7 +2,7 @@
 
 Integrantes del grupo:
 Juan Andrés Martínez Gutierrez(74200)
-Yarany Acevedo (74012)
+Yurany Acevedo Duran (74012)
 
 INFORMACION ACERCA DE EL PROYECTO
 
