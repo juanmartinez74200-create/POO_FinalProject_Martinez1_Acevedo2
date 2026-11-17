@@ -6,7 +6,7 @@ Yarany Acevedo (74012)
 
 INFORMACION ACERCA DE EL PROYECTO
 
-En la información a continuación se dará una explicación  acerca de el proyecto de programación orientada a objetos en donde nuestro objetivos es llevar a cabo un sistema de gestión de una tienda de videojuegos (VideoGame Store),en donde tiene ciertos requisitos mínimos que incluyen a el paradigma orientado a objetos con conceptos como la herencia, él polimorfismo, las relaciones entre otras y un sistema de carpetas encargado de distribuir responsabilidades.
+En la información a continuación se dará una explicación  acerca de el proyecto de programación orientada a objetos en donde nuestro objetivos es llevar a cabo un sistema de gestión de una tienda de videojuegos (VideoGame Store),la cual tiene ciertos requisitos mínimos que incluyen a el paradigma orientado a objetos con conceptos como la herencia, él polimorfismo, las relaciones entre otras y un sistema de carpetas encargado de distribuir responsabilidades.
 
 En este este proyecto se ha tenido como requisito tener por lo menos nueve clases de las cuales se conocerán a continuación :
 
