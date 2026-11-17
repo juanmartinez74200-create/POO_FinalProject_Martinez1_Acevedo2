@@ -36,4 +36,10 @@ public class DigitalGame extends VideoGame {
 
     public void decreaseLicenses() {
     };
+    @Override 
+    public float calculateSellingPrice(){
+    }
+    public String gameFormat(){
+        return "Digital";
+    }
 }

@@ -1,15 +1,21 @@
 package domain;
 
+import java.util.concurrent.locks.Condition;
+
 public class PhysicalGame extends VideoGame {
     private int stock;
-    private String condition;
+    public enum Condition {
+    NEW,
+    USED
+    }
+    private Condition condition;
 
     // constructor de la clase
     public PhysicalGame(int Id, String title, String developer, int releaseYear, float basePrice,
             Plataform plataform, boolean activate, int stock, String condition) {
         super(Id, title, developer, releaseYear, basePrice, plataform, activate);
         setStock(stock);
-        setCondition(condition);
+       setCondition(getCondition());
     }
 
     // getters y setters
@@ -21,11 +27,11 @@ public class PhysicalGame extends VideoGame {
         this.stock = stock;
     }
 
-    public String getCondition() {
+    public Condition getCondition() {
         return condition;
     }
 
-    public void setCondition(String condition) {
+    public void setCondition(Condition condition) {
         this.condition = condition;
     }
 
@@ -36,7 +42,14 @@ public class PhysicalGame extends VideoGame {
     };
 
     @Override 
-    public float calculateSellingPrice(){};
+    public float calculateSellingPrice(){
+        if (condition==Condition.NEW) {
+            return calculateBasePrice()*
+        }
 
-    public String gameFormat(){};
+    }
+
+    public String gameFormat(){
+        return "Fisico";
+    };
 }

@@ -23,10 +23,11 @@ public class Store {
     private Employee employee;
     private Sale sale;
     private Customer customer;
+    private Receipt receipt;
 
     public Store() {
         sales = new LinkedList<>();
-        videoGames=new LinkedList<>();
+        videoGames = new LinkedList<>();
         employees = new LinkedList<>();
         customers = new LinkedList<>();
     }
@@ -117,7 +118,7 @@ public class Store {
         Employee employee = searchEmployee(Employee);
         if (employee != null) {
             employee.setEmployeeName(employeeName);
-            ;
+
         }
     }
 
@@ -129,6 +130,12 @@ public class Store {
     }
 
     // CRUDS dee busqueda
+    public void registerSale(int saleId, int amount, Employee employee, Customer customer) {
+        Sale sale = searchSale(saleId);
+        if (sale != null) {
+            sales.add(sale);
+        }
+    }
 
     public Sale searchSale(int saleIdFind) {
         for (Sale sale : sales) {
@@ -138,6 +145,15 @@ public class Store {
 
         }
         return null;
+    }
+
+    public void registerCustomer(int customerId, String name, String phoneNumber, String email) {
+        Customer customer = searchCustomer(customerId);
+        if (customer == null) {
+            customers.add(new Customer(customerId, name, phoneNumber, email));
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     public Customer searchCustomer(int customerIdFind) {
@@ -150,4 +166,39 @@ public class Store {
         return null;
     }
 
+    public void ModifyCustomer(int customerId, String name, String phoneNumber, String email) {
+        Customer customer = searchCustomer(customerId);
+        if (customer != null) {
+            customer.setName(name);
+            customer.setPhoneNumber(phoneNumber);
+            customer.setEmail(email);
+        }
+
+    }
+
+    public void deleteCustomer(int customerId) {
+        Customer customer = searchCustomer(customerId);
+        if (customer != null) {
+            customers.remove(customer);
+        }
+    }
+
+    public void registerReceipt(int receiptId,Sale sale){
+        Receipt receipt =searchReceipt(receiptId);
+        if (receipt!=null) {
+            receipst.add(receipt);
+        }
+    }
+    public Receipt searchReceipt(int receiptIdFind){
+        for (Receipt receipt : receipst) {
+            if (receipt.getReceiptId()==receiptIdFind) {
+                return receipt;
+            }
+        }
+        return null;
+    }
+
+
+
 }
+

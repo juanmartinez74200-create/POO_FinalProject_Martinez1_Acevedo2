@@ -24,7 +24,7 @@ public abstract class VideoGame {
         setTitle(title);
         setDeveloper(developer);
         setReleaseYear(releaseYear);
-        setBasePrice(calculateBasePrice());
+        setBasePrice(basePrice);
         setPlataform(plataform);
         setActivate(activate);
     
