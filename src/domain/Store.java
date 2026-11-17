@@ -12,8 +12,6 @@ public class Store {
     private int id;
     private List<Sale> sales;
     private List<Receipt> receipst;
-    private List<PhysicalGame> physiclaGames;
-    private List<DigitalGame> digitalGames;
     private List<Inventary> inventaries;
     private List<Employee> employees;
     private List<Customer> customers;
@@ -24,6 +22,7 @@ public class Store {
     private Sale sale;
     private Customer customer;
     private Receipt receipt;
+    private Inventary inventary;
 
     public Store() {
         sales = new LinkedList<>();
@@ -55,9 +54,6 @@ public class Store {
     public static void setStoreName(String storeName) {
         Store.storeName = storeName;
     }
-
-    public void listVideoGame() {
-    };
 
     public void registerVideoGame(int id, String title, String developer, int releaseYear, float basePrice,
             Plataform plataform, boolean activate) {
