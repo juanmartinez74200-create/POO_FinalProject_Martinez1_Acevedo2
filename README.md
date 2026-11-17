@@ -144,7 +144,7 @@ classDiagram
 
   Category "1" --> "0..*" DigitalGame
   Category "1" --> "0..*" PhysicalGame
-  Category "1" --> "0..*" Sales
+  Category "1" --> "0..*" Sale
 
   Inventary "1" --> "0..*" VideoGame
   Inventary "1" --> "0..*" Sale
