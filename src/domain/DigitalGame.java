@@ -9,7 +9,7 @@ public class DigitalGame extends VideoGame {
             Plataform plataform, boolean activate, float downloadSize, int availableLicenses) {
         super(gameFormat, title, developer, releaseYear, basePrice, plataform, activate);
         setDownloadSize(downloadSize);
-        setDownloadSize(downloadSize);
+        setAvailableLicenses(availableLicenses);
 
     }
 

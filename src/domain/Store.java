@@ -54,7 +54,7 @@ public class Store {
     public static void setStoreName(String storeName) {
         Store.storeName = storeName;
     }
-
+    //CRUDs completos y unos parciales
     public void registerVideoGame(int id, String title, String developer, int releaseYear, float basePrice,
             Plataform plataform, boolean activate) {
         VideoGame videoGame = searchVideoGame(id);
@@ -89,7 +89,6 @@ public class Store {
 
     }
 
-    // crud para employee
     public void registeEmployee(int employeeId, String employeeName) {
         Employee employee = searchEmployee(employeeId);
         if (employee == null) {
@@ -125,7 +124,6 @@ public class Store {
         }
     }
 
-    // CRUDS dee busqueda
     public void registerSale(int saleId, int amount, Employee employee, Customer customer) {
         Sale sale = searchSale(saleId);
         if (sale != null) {
