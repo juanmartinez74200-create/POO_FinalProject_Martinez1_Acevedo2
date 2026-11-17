@@ -13,18 +13,30 @@ classDiagram
   direction LR
   class Store
   class VideoGame{
+         <<abstract>> 
         -int id;
         -String title;
         -float developer;
         -int releaseYear;
         -float basePrice;
         -boolean activate;
-        -Plataform plataform
+        -Plataform plataform;
+
+        +calculateSellingPrice () float*
+        +calculateBasePrice () int
+        +gameFormat () String*       
   }
 
   class Inventary
   class Category
-  class Sale
+  class Sale{
+        -int saleId;
+        -int amount;
+        -Employee employee;
+        -Customer customer;
+
+        +totalPurchase () float;
+      }
   class Employee
   class Customer
   class Receipt
