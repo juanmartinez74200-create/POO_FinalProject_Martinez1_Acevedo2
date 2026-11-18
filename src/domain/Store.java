@@ -5,34 +5,39 @@ import java.util.List;
 
 import javax.imageio.IIOException;
 
-import domain.VideoGame.Platform;
-
 public class Store {
     private static String storeName;
     private int id;
+
+//listas de la tienda 
     private List<Sale> sales;
-    private List<Receipt> receipst;
-    private List<Inventary> inventaries;
+    private List<Receipt> receipts;
     private List<Employee> employees;
     private List<Customer> customers;
     private List<Category> categories;
     private List<VideoGame> videoGames;
+
+    //¿Eliminar esto? dentro de los metodos se pueden crear variables locales cuando se necesiten, ya que tenemos las listas.
     private VideoGame videoGame;
     private Employee employee;
     private Sale sale;
     private Customer customer;
     private Receipt receipt;
-    private Inventary inventary;
+    //
 
+    //constructor vacio 
     public Store() {
         sales = new LinkedList<>();
         videoGames = new LinkedList<>();
         employees = new LinkedList<>();
         customers = new LinkedList<>();
+        receipts = new LinkedList<>();
+        categories = new LinkedList<>();
     }
 
-    // contructor de la clase
+    // contructor de la clase con parametros 
     public Store(int id, String storeName) {
+        this();  //llamamos al constructor vacio 
         setId(id);
         setStoreName(storeName);
     }
@@ -54,14 +59,18 @@ public class Store {
     public static void setStoreName(String storeName) {
         Store.storeName = storeName;
     }
+
     //CRUDs completos y unos parciales
-    public void registerVideoGame(int id, String title, String developer, int releaseYear, float basePrice,
-            Plataform plataform, boolean activate) {
-        VideoGame videoGame = searchVideoGame(id);
-        if (videoGame == null) {
-            videoGames.add(new VideoGame(id, title, developer, releaseYear, basePrice, plataform, activate));
+
+     //recibimos el videogame como objeto para poder registrar tanto videojuegos digitales como fisicos
+     //sin tener que crear un metodo para cada uno, todo esto porque videogame es una clase abstracta.
+    public void registerVideoGame(VideoGame videoGame) {
+        VideoGame existingGame = searchVideoGame(videoGame.getId());
+
+        if (existingGame == null) {
+            videoGames.add(videoGame);
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("el videojuego ya esta registrado");
         }
     }
 
@@ -74,10 +83,21 @@ public class Store {
         return null;
     }
 
-    public void modifyVideoGame(int id) {
+    //aca se busca el videojuego por id y se permite modificar todos los atributos del videojuego
+    //si mno existe el videojuego se muestra error 
+    public void modifyVideoGame(int id, String title,String developer, int releaseYear, float basePrice,
+         Platform platform, boolean activate){
         VideoGame videoGame = searchVideoGame(id);
         if (videoGame != null) {
             videoGame.setId(id);
+            videoGame.setTitle(title);
+            videoGame.setDeveloper(developer);
+            videoGame.setReleaseYear(releaseYear);
+            videoGame.setBasePrice(basePrice);
+            videoGame.setPlatform(platform);
+            videoGame.setActivate(activate);
+        }else{
+            throw new IllegalArgumentException ("el videojuego no existe");
         }
     }
 
