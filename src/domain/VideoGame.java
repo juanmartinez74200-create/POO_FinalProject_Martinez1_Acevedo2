@@ -8,35 +8,28 @@ public abstract class VideoGame {
     private float basePrice;
     private boolean activate;
 
-    protected enum Plataform {
-        NINTENDO,
-        PC,
-        XBOX,
-        PLAYSTATION
-    }
-
-    private Plataform plataform;
+    private Platform platform;
 
     // constructor
-    public VideoGame(int id, String title, String developer, int releaseYear, float basePrice, Plataform plataform,
+    public VideoGame(int id, String title, String developer, int releaseYear, float basePrice, Platform platform,
             boolean activate) {
         setId(id);
         setTitle(title);
         setDeveloper(developer);
         setReleaseYear(releaseYear);
         setBasePrice(basePrice);
-        setPlataform(plataform);
+        setPlatform(platform);
         setActivate(activate);
     
     }
 
     // getters y setters
-    public Plataform getPlataform() {
-        return plataform;
+    public Platform getPlatform() {
+        return platform;
     }
 
-    public void setPlataform(Plataform plataform) {
-        this.plataform = plataform;
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
     }
 
     public int getId() {
@@ -90,18 +83,9 @@ public abstract class VideoGame {
 
     public abstract float calculateSellingPrice();
 
-    public int calculateBasePrice() {
-        if (plataform == Plataform.NINTENDO) {
-            return 165000;
-        } else if (plataform == Plataform.PC) {
-            return 172000;
-        } else if (plataform == Plataform.PLAYSTATION) {
-            return 135000;
-        } else if (plataform == Plataform.XBOX) {
-            return 150000;
-        }
-        throw new IllegalArgumentException("plataforma de videojuego no registrada");
-
+    public float calculateBasePrice() {
+       return platform.getPrice();
     }
+
     public abstract String gameFormat();
 }
