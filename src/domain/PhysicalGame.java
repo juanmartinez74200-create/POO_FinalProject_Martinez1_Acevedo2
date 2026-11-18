@@ -41,9 +41,15 @@ public class PhysicalGame extends VideoGame {
     }
 
     public void increaseStock() {
+        stock++;    //aumenta el inventario en una unidad
     };
 
     public void decreaseStock() {
+        if (stock > 0) {
+            stock--;  //disminuye el inventario si hay unidades disponibles
+        }else{
+            throw new IllegalArgumentException("no hay videojuegos disponibles");
+        }
     };
 
     @Override 
