@@ -12,8 +12,8 @@ public class PhysicalGame extends VideoGame {
 
     // constructor de la clase
     public PhysicalGame(int Id, String title, String developer, int releaseYear, float basePrice,
-            Plataform plataform, boolean activate, int stock, String condition) {
-        super(Id, title, developer, releaseYear, basePrice, plataform, activate);
+            Platform platform, boolean activate, int stock, String condition) {
+        super(Id, title, developer, releaseYear, basePrice, platform, activate);
         setStock(stock);
        setCondition(getCondition());
     }

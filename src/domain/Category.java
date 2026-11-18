@@ -3,18 +3,15 @@ package domain;
 public class Category {
     private int categoryId;
     private String description;
-    public enum TipeGender {
-        ACCION,
-        COMBATE,
-        CARRERAS,
-        DEPORTE
-    }
-    protected TipeGender tipeGender;
+
+    private Gender gender;
+    
+
 
     // metodos
-    public Category(int categoryId,TipeGender tipeGender, String decription) {
+    public Category(int categoryId,Gender gender, String decription) {
         setCategoryId(categoryId);
-        setTipeGender(tipeGender);
+        setGender(gender);
         setDescription(decription);
     }
 
@@ -27,12 +24,12 @@ public class Category {
         this.categoryId = categoryId;
     }
 
-    public TipeGender getTipeGender(){
-        return tipeGender;
+    public Gender getGender(){
+        return gender;
     }
 
-    public void setTipeGender(TipeGender tipeGender) {
-        this.tipeGender = tipeGender;
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public String getDescription() {

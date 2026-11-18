@@ -6,8 +6,8 @@ public class DigitalGame extends VideoGame {
 
     // constructor de la clase
     public DigitalGame(int gameFormat, String title, String developer, int releaseYear, float basePrice,
-            Plataform plataform, boolean activate, float downloadSize, int availableLicenses) {
-        super(gameFormat, title, developer, releaseYear, basePrice, plataform, activate);
+            Platform platform, boolean activate, float downloadSize, int availableLicenses) {
+        super(gameFormat, title, developer, releaseYear, basePrice, platform, activate);
         setDownloadSize(downloadSize);
         setAvailableLicenses(availableLicenses);
 

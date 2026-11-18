@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.imageio.IIOException;
 
-import domain.VideoGame.Plataform;
+import domain.VideoGame.Platform;
 
 public class Store {
     private static String storeName;
