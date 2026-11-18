@@ -15,7 +15,11 @@ public class Platform {
     }
 
     public void setName(String name){
-        this.name= name; 
+        if(name != null && !name.trim().isEmpty()){
+        this.name= name;
+        } else {
+            throw new IllegalArgumentException("el nombre de la plataforma es obligatorio");
+        }
     }
 
     public float getPrice(){
@@ -23,7 +27,11 @@ public class Platform {
     }
 
     public void setPrice(float price){
+        if (price >= 0) {
         this.price = price;
+        } else{ 
+            throw new IllegalArgumentException ("el precio no puede ser negativo");
+        }
     }
 
 

@@ -9,10 +9,10 @@ public class Category {
 
 
     // metodos
-    public Category(int categoryId,Gender gender, String decription) {
+    public Category(int categoryId,Gender gender, String description) {
         setCategoryId(categoryId);
         setGender(gender);
-        setDescription(decription);
+        setDescription(description);
     }
 
     // getters y setters
@@ -29,7 +29,11 @@ public class Category {
     }
 
     public void setGender(Gender gender) {
+        if (gender != null) {
         this.gender = gender;
+        } else {
+            throw new IllegalArgumentException("debe de seleccionar un genero");
+        }
     }
 
     public String getDescription() {
@@ -37,9 +41,11 @@ public class Category {
     }
 
     public void setDescription(String description) {
-        this.description = description;
-    }
-
-    
-
+        if (description != null && !description.trim().isEmpty()) {
+            this.description = description;
+        } else{
+            throw new IllegalArgumentException("la descripcion es obligatoria");
+        }
+    } 
 }
+//preguntar si se quiere tener una lista fija de generos o se quieren manejar libremente 

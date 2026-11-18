@@ -12,6 +12,10 @@ public class Gender {
     }
 
     public void setName (String name){
-        this.name = name;
-    }
+        if(name != null && !name.trim().isEmpty()){
+        this.name= name;
+        } else {
+            throw new IllegalArgumentException("el nombre del genero es obligatorio");
+        }
+    }  
 }

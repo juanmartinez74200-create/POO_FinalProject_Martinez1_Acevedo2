@@ -37,11 +37,11 @@ public class DigitalGame extends VideoGame {
             throw new IllegalArgumentException("las licencias no pueden ser negativas");
         }
     }
-    //metodos
 
+    //metodos
     public void increaseLicenses() {
         availableLicenses++;
-    };
+    }
 
     public void decreaseLicenses() {
         if (availableLicenses > 0) {
@@ -53,7 +53,7 @@ public class DigitalGame extends VideoGame {
 
     @Override 
     public float calculateSellingPrice(){
-        return getBasePrice()* calculateBasePrice();
+        return getBasePrice() + calculateBasePrice();
     }
     public String gameFormat(){
         return "Digital";
