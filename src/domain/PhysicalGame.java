@@ -24,7 +24,12 @@ public class PhysicalGame extends VideoGame {
     }
 
     public void setStock(int stock) {
-        this.stock = stock;
+        if (stock >= 0) {
+            this.stock = stock;
+        }else{
+            throw new IllegalArgumentException("El stock no puede ser negativo");
+        }
+        
     }
 
     public Condition getCondition() {
