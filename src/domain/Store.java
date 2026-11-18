@@ -14,7 +14,7 @@ public class Store {
     private List<Receipt> receipts;
     private List<Employee> employees;
     private List<Customer> customers;
-    private List<Category> categories;
+    private List<Category> categories;  //¿ se hara CRUD de esto?  queremos relacionar las categorias con los videojuegos?
     private List<VideoGame> videoGames;
 
     //¿Eliminar esto? dentro de los metodos se pueden crear variables locales cuando se necesiten, ya que tenemos las listas.
@@ -89,7 +89,7 @@ public class Store {
          Platform platform, boolean activate){
         VideoGame videoGame = searchVideoGame(id);
         if (videoGame != null) {
-            videoGame.setId(id);
+            videoGame.setId(id);  //¿linea innecesaria?
             videoGame.setTitle(title);
             videoGame.setDeveloper(developer);
             videoGame.setReleaseYear(releaseYear);
@@ -116,7 +116,7 @@ public class Store {
             employees.add(new Employee(employeeId, employeeName));
 
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("el empleado ya esta registrado");
         }
     }
   
@@ -153,7 +153,7 @@ public class Store {
     //busca si la venta ya existe
     //si no existe crea una nueva venta y la agrega a la lista 
     //si la venta ya existe, muestra error
-    public void registerSale(int saleId, int amount, Employee employee, Customer customer) {
+    public void registerSale(int saleId, int amount, Employee employee, Customer customer, VideoGame videoGame) {
         Sale sale = searchSale(saleId);
         if (sale == null) {
             sales.add(new Sale(saleId, amount, employee, customer, videoGame));

@@ -44,7 +44,11 @@ public class Sale {
     }
 
     public void setEmployee(Employee employee) {
+       if (employee != null) {
         this.employee = employee;
+       } else {
+        throw new IllegalArgumentException("debe seleccionar un empleado");
+       }
     }
 
     public Customer getCustomer() {
@@ -52,8 +56,14 @@ public class Sale {
     }
 
     public void setCustomer(Customer customer) {
-        this.customer = customer;
+        if (customer != null) {
+       this.customer = customer;
+       } else {
+        throw new IllegalArgumentException("debe seleccionar un cliente");
+       }
     }
+
+
     
     public VideoGame getVideoGame(){
         return videoGame;

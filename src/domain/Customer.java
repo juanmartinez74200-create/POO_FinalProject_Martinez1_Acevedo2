@@ -3,7 +3,7 @@ package domain;
 public class Customer {
     private int customerId;
     private String name;
-    private String PhoneNumber;
+    private String phoneNumber;
     private String email;
 
     public Customer(int customerId,String name,String phoneNumber,String email){
@@ -26,10 +26,10 @@ public class Customer {
         this.name=name;
     }
     public String getPhoneNumber(){
-        return PhoneNumber;
+        return phoneNumber;
     }
     public void setPhoneNumber(String phoneNumber){
-        this.PhoneNumber=phoneNumber;
+        this.phoneNumber=phoneNumber;
     }
     public String getEmail(){
         return email;

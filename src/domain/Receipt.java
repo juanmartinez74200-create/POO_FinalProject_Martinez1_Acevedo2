@@ -14,7 +14,11 @@ public class Receipt {
     }
 
     public void setSale(Sale sale) {
+        if (sale != null) {
         this.sale = sale;
+        } else {
+            throw new IllegalArgumentException("el recibo debe estar asociada a una venta");
+        }
     }
 
     public int getReceiptId() {
