@@ -1,6 +1,6 @@
 package domain;
 
-import java.util.concurrent.locks.Condition;
+//import java.util.concurrent.locks.Condition; //ya tenemos un propio enum condition ¿eliminiar?
 
 public class PhysicalGame extends VideoGame {
     private int stock;
@@ -15,7 +15,7 @@ public class PhysicalGame extends VideoGame {
             Platform platform, boolean activate, int stock, String condition) {
         super(Id, title, developer, releaseYear, basePrice, platform, activate);
         setStock(stock);
-       setCondition(getCondition());
+       setCondition(Condition.valueOf(condition.toUpperCase())); //recibe NEW o USED
     }
 
     // getters y setters
@@ -43,10 +43,12 @@ public class PhysicalGame extends VideoGame {
 
     @Override 
     public float calculateSellingPrice(){
-        if (condition==Condition.NEW) {
-            return calculateBasePrice()*
-        }
+        float price= getBasePrice() + calculateBasePrice();   //precio base del videojuego + precio de la plataforma                                                //precio de la plataforma
 
+        if (condition==Condition.USED) {
+            return price * 0.95f;       //descuento de el 5% si el videojuego es usado.
+        }
+            return  price;
     }
 
     public String gameFormat(){

@@ -156,7 +156,7 @@ public class Store {
     public void registerSale(int saleId, int amount, Employee employee, Customer customer) {
         Sale sale = searchSale(saleId);
         if (sale == null) {
-            sales.add(new Sale(saleId, amount, employee, customer));
+            sales.add(new Sale(saleId, amount, employee, customer, videoGame));
         }else{
             throw new IllegalArgumentException("la venta ya esta registrada");
         }
