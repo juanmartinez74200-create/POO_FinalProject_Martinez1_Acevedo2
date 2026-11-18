@@ -3,7 +3,7 @@ package domain;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.imageio.IIOException;
+//import javax.imageio.IIOException; //esto no se esta utilzando
 
 public class Store {
     private static String storeName;
@@ -105,11 +105,12 @@ public class Store {
         VideoGame videoGame = searchVideoGame(id);
         if (videoGame != null) {
             videoGames.remove(videoGame);
+        } else {
+            throw new IllegalArgumentException ("el videojuego no existe");
         }
-
     }
 
-    public void registeEmployee(int employeeId, String employeeName) {
+    public void registerEmployee(int employeeId, String employeeName) {
         Employee employee = searchEmployee(employeeId);
         if (employee == null) {
             employees.add(new Employee(employeeId, employeeName));
@@ -118,7 +119,8 @@ public class Store {
             throw new IllegalArgumentException();
         }
     }
-
+  
+    //busca el empleado y si no esta registrado, lo agrega a la lista 
     public Employee searchEmployee(int employeeIdFind) {
         for (Employee employee : employees) {
             if (employee.getEmployeeId() == employeeIdFind) {
@@ -128,12 +130,14 @@ public class Store {
         }
         return null;
     }
-
-    public void modifyEmployee(int Employee, String employeeName) {
-        Employee employee = searchEmployee(Employee);
+        //busca el empleado por su id y permite cambiar su nombre
+        //si no existe, aparece error 
+    public void modifyEmployee(int EmployeeId, String employeeName) {
+        Employee employee = searchEmployee(EmployeeId);
         if (employee != null) {
             employee.setEmployeeName(employeeName);
-
+        } else{
+            throw new IllegalArgumentException("El empleado no existe");
         }
     }
 
@@ -141,15 +145,23 @@ public class Store {
         Employee employee = searchEmployee(employeeId);
         if (employee != null) {
             employees.remove(employee);
+        }else{
+            throw new IllegalArgumentException("el empleado no existe");
         }
     }
 
+    //busca si la venta ya existe
+    //si no existe crea una nueva venta y la agrega a la lista 
+    //si la venta ya existe, muestra error
     public void registerSale(int saleId, int amount, Employee employee, Customer customer) {
         Sale sale = searchSale(saleId);
-        if (sale != null) {
-            sales.add(sale);
+        if (sale == null) {
+            sales.add(new Sale(saleId, amount, employee, customer));
+        }else{
+            throw new IllegalArgumentException("la venta ya esta registrada");
         }
     }
+
 
     public Sale searchSale(int saleIdFind) {
         for (Sale sale : sales) {
@@ -161,12 +173,13 @@ public class Store {
         return null;
     }
 
+
     public void registerCustomer(int customerId, String name, String phoneNumber, String email) {
         Customer customer = searchCustomer(customerId);
         if (customer == null) {
             customers.add(new Customer(customerId, name, phoneNumber, email));
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("El cliente ya esta registrado");
         }
     }
 
@@ -180,12 +193,15 @@ public class Store {
         return null;
     }
 
-    public void ModifyCustomer(int customerId, String name, String phoneNumber, String email) {
+
+    public void modifyCustomer(int customerId, String name, String phoneNumber, String email) {
         Customer customer = searchCustomer(customerId);
         if (customer != null) {
             customer.setName(name);
             customer.setPhoneNumber(phoneNumber);
             customer.setEmail(email);
+        }else{
+            throw new IllegalArgumentException("el cliente no existe");
         }
 
     }
@@ -194,25 +210,29 @@ public class Store {
         Customer customer = searchCustomer(customerId);
         if (customer != null) {
             customers.remove(customer);
+        }else{
+            throw new IllegalArgumentException("el cliente no existe");
         }
     }
 
+
     public void registerReceipt(int receiptId,Sale sale){
         Receipt receipt =searchReceipt(receiptId);
-        if (receipt!=null) {
-            receipst.add(receipt);
+        if (receipt ==null) {
+            receipts.add(new Receipt(receiptId, sale));
+        }else{
+            throw new IllegalArgumentException("el recibo ya ersta registrado");
         }
     }
+
+
     public Receipt searchReceipt(int receiptIdFind){
-        for (Receipt receipt : receipst) {
+        for (Receipt receipt : receipts) {
             if (receipt.getReceiptId()==receiptIdFind) {
                 return receipt;
             }
         }
         return null;
     }
-
-
-
 }
 
