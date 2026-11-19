@@ -152,6 +152,7 @@ classDiagram
   Store "1" --> "0..*" PhysicalGame
   Store "1" --> "0..*" DigitalGame
   Store "1" --> "0..*" Platform
+  Store "1" --> "0..*" Gender
 
   VideoGame <|-- DigitalGame
   VideoGame <|-- PhysicalGame
@@ -171,6 +172,8 @@ classDiagram
   Receipt "1" --> "1" Sale
 
   Platform "1" --> "0..*" VideoGame
+
+  Gender "1" --> "0..*" VideoGame
 
 
   
