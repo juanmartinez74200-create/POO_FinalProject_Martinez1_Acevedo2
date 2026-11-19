@@ -1,14 +1,17 @@
 package domain;
 
 public class Platform {
+    private final int plataformId;
     private String name;
     private float price;
 
 
-    public Platform(String name, float price){
+    public Platform(int plataformId,String name, float price){
+    this.plataformId=plataformId;
        setName(name); 
        setPrice(price);
     }
+    
 
     public String getName(){
         return name;
@@ -32,6 +35,11 @@ public class Platform {
         } else{ 
             throw new IllegalArgumentException ("el precio no puede ser negativo");
         }
+    }
+
+
+    public int getPlataformId() {
+        return plataformId;
     }
 
 

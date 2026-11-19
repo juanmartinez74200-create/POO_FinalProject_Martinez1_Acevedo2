@@ -1,29 +1,14 @@
 package domain;
 
-public class Customer {
-    private int customerId;
-    private String name;
+public class Customer extends Person{
+   
     private String phoneNumber;
     private String email;
 
-    public Customer(int customerId,String name,String phoneNumber,String email){
-        setCustomerId(customerId);
-        setName(name);
+    public Customer(int id,String name,String phoneNumber,String email){    
+        super(id, name);
         setPhoneNumber(phoneNumber);
         setEmail(email);
-    }
-
-    public int getCustomerId(){
-        return customerId;
-    }
-    public void setCustomerId(int customerId){
-        this.customerId=customerId;
-    }
-    public String getName(){
-        return name;
-    }
-    public void setName(String name){
-        this.name=name;
     }
     public String getPhoneNumber(){
         return phoneNumber;

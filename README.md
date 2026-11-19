@@ -104,7 +104,7 @@ classDiagram
         -String employeeName;
       }
   class Customer{
-        -int customerId;
+        -int Id;
         -String name;
         -String phoneNumber;
         -String email;

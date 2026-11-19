@@ -1,10 +1,16 @@
 package domain;
 
 public class Gender {
+    private final int genderId;
     private String name; 
 
-    public Gender (String name){
+    public Gender (int genderId,String name){
+        this.genderId=genderId;
         setName(name);
+    }
+    
+    public int getGenderId(){
+        return genderId;
     }
 
     public String getName(){

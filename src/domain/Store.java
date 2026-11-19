@@ -3,29 +3,29 @@ package domain;
 import java.util.LinkedList;
 import java.util.List;
 
-//import javax.imageio.IIOException; //esto no se esta utilzando
-
 public class Store {
     private static String storeName;
     private int id;
 
-//listas de la tienda 
+    // listas de la tienda
     private List<Sale> sales;
     private List<Receipt> receipts;
     private List<Employee> employees;
     private List<Customer> customers;
-    private List<Category> categories;  //¿ se hara CRUD de esto?  queremos relacionar las categorias con los videojuegos?
+    private List<Category> categories;
     private List<VideoGame> videoGames;
+    private List<Gender> gendes;
+    private List<Platform> platforms;
 
-    //¿Eliminar esto? dentro de los metodos se pueden crear variables locales cuando se necesiten, ya que tenemos las listas.
     private VideoGame videoGame;
     private Employee employee;
     private Sale sale;
     private Customer customer;
     private Receipt receipt;
-    //
+    private Gender gerder;
+    private Platform platform;
 
-    //constructor vacio 
+    // constructor vacio
     public Store() {
         sales = new LinkedList<>();
         videoGames = new LinkedList<>();
@@ -33,11 +33,12 @@ public class Store {
         customers = new LinkedList<>();
         receipts = new LinkedList<>();
         categories = new LinkedList<>();
+        platforms = new LinkedList<>();
     }
 
-    // contructor de la clase con parametros 
+    // contructor de la clase con parametros
     public Store(int id, String storeName) {
-        this();  //llamamos al constructor vacio 
+        this();
         setId(id);
         setStoreName(storeName);
     }
@@ -60,10 +61,9 @@ public class Store {
         Store.storeName = storeName;
     }
 
-    //CRUDs completos y unos parciales
+    // CRUDs completos y unos parciales
 
-     //recibimos el videogame como objeto para poder registrar tanto videojuegos digitales como fisicos
-     //sin tener que crear un metodo para cada uno, todo esto porque videogame es una clase abstracta.
+    // CRUD completo class VideoGame
     public void registerVideoGame(VideoGame videoGame) {
         VideoGame existingGame = searchVideoGame(videoGame.getId());
 
@@ -83,21 +83,15 @@ public class Store {
         return null;
     }
 
-    //aca se busca el videojuego por id y se permite modificar todos los atributos del videojuego
-    //si mno existe el videojuego se muestra error 
-    public void modifyVideoGame(int id, String title,String developer, int releaseYear, float basePrice,
-         Platform platform, boolean activate){
+    public void modifyVideoGame(int id, String title, String developer, int releaseYear, float basePrice,
+            boolean activate) {
         VideoGame videoGame = searchVideoGame(id);
         if (videoGame != null) {
-            videoGame.setId(id);  //¿linea innecesaria?
-            videoGame.setTitle(title);
             videoGame.setDeveloper(developer);
-            videoGame.setReleaseYear(releaseYear);
             videoGame.setBasePrice(basePrice);
-            videoGame.setPlatform(platform);
             videoGame.setActivate(activate);
-        }else{
-            throw new IllegalArgumentException ("el videojuego no existe");
+        } else {
+            throw new IllegalArgumentException("el videojuego no existe");
         }
     }
 
@@ -106,10 +100,11 @@ public class Store {
         if (videoGame != null) {
             videoGames.remove(videoGame);
         } else {
-            throw new IllegalArgumentException ("el videojuego no existe");
+            throw new IllegalArgumentException("el videojuego no existe");
         }
     }
 
+    // CRUD completo de class Employe
     public void registerEmployee(int employeeId, String employeeName) {
         Employee employee = searchEmployee(employeeId);
         if (employee == null) {
@@ -119,24 +114,22 @@ public class Store {
             throw new IllegalArgumentException("el empleado ya esta registrado");
         }
     }
-  
-    //busca el empleado y si no esta registrado, lo agrega a la lista 
-    public Employee searchEmployee(int employeeIdFind) {
+
+    public Employee searchEmployee(int idFind) {
         for (Employee employee : employees) {
-            if (employee.getEmployeeId() == employeeIdFind) {
+            if (employee.getId() == idFind) {
                 return employee;
             }
 
         }
         return null;
     }
-        //busca el empleado por su id y permite cambiar su nombre
-        //si no existe, aparece error 
-    public void modifyEmployee(int EmployeeId, String employeeName) {
-        Employee employee = searchEmployee(EmployeeId);
+
+    public void modifyEmployee(int id, String name) {
+        Employee employee = searchEmployee(id);
         if (employee != null) {
-            employee.setEmployeeName(employeeName);
-        } else{
+            employee.setName(name);
+        } else {
             throw new IllegalArgumentException("El empleado no existe");
         }
     }
@@ -145,23 +138,21 @@ public class Store {
         Employee employee = searchEmployee(employeeId);
         if (employee != null) {
             employees.remove(employee);
-        }else{
+        } else {
             throw new IllegalArgumentException("el empleado no existe");
         }
     }
 
-    //busca si la venta ya existe
-    //si no existe crea una nueva venta y la agrega a la lista 
-    //si la venta ya existe, muestra error
+    // CRUD parcial de class Sale
+
     public void registerSale(int saleId, int amount, Employee employee, Customer customer, VideoGame videoGame) {
         Sale sale = searchSale(saleId);
         if (sale == null) {
             sales.add(new Sale(saleId, amount, employee, customer, videoGame));
-        }else{
+        } else {
             throw new IllegalArgumentException("la venta ya esta registrada");
         }
     }
-
 
     public Sale searchSale(int saleIdFind) {
         for (Sale sale : sales) {
@@ -173,19 +164,19 @@ public class Store {
         return null;
     }
 
-
-    public void registerCustomer(int customerId, String name, String phoneNumber, String email) {
-        Customer customer = searchCustomer(customerId);
+    public void registerCustomer(int id, String name, String phoneNumber, String email) {
+        Customer customer = searchCustomer(id);
         if (customer == null) {
-            customers.add(new Customer(customerId, name, phoneNumber, email));
+            customers.add(new Customer(id, name, phoneNumber, email));
         } else {
             throw new IllegalArgumentException("El cliente ya esta registrado");
         }
     }
+    // CRUD completo class Customer
 
-    public Customer searchCustomer(int customerIdFind) {
+    public Customer searchCustomer(int idFind) {
         for (Customer customer : customers) {
-            if (customer.getCustomerId() == customerIdFind) {
+            if (customer.getId() == idFind) {
                 return customer;
             }
 
@@ -193,46 +184,103 @@ public class Store {
         return null;
     }
 
-
-    public void modifyCustomer(int customerId, String name, String phoneNumber, String email) {
-        Customer customer = searchCustomer(customerId);
+    public void modifyCustomer(int Id, String name, String phoneNumber, String email) {
+        Customer customer = searchCustomer(Id);
         if (customer != null) {
             customer.setName(name);
             customer.setPhoneNumber(phoneNumber);
             customer.setEmail(email);
-        }else{
+        } else {
             throw new IllegalArgumentException("el cliente no existe");
         }
 
     }
 
-    public void deleteCustomer(int customerId) {
-        Customer customer = searchCustomer(customerId);
+    public void deleteCustomer(int Id) {
+        Customer customer = searchCustomer(Id);
         if (customer != null) {
             customers.remove(customer);
-        }else{
+        } else {
             throw new IllegalArgumentException("el cliente no existe");
         }
     }
 
+    // CRUD parcial class Receipt
 
-    public void registerReceipt(int receiptId,Sale sale){
-        Receipt receipt =searchReceipt(receiptId);
-        if (receipt ==null) {
+    public void registerReceipt(int receiptId, Sale sale) {
+        Receipt receipt = searchReceipt(receiptId);
+        if (receipt == null) {
             receipts.add(new Receipt(receiptId, sale));
-        }else{
-            throw new IllegalArgumentException("el recibo ya ersta registrado");
+        } else {
+            throw new IllegalArgumentException("el recibo ya esta registrado");
         }
     }
 
-
-    public Receipt searchReceipt(int receiptIdFind){
+    public Receipt searchReceipt(int receiptIdFind) {
         for (Receipt receipt : receipts) {
-            if (receipt.getReceiptId()==receiptIdFind) {
+            if (receipt.getReceiptId() == receiptIdFind) {
                 return receipt;
             }
         }
         return null;
     }
-}
 
+    // CRUD parcial class Gender
+
+    public void registerGender(int genderId, String name) {
+        Gender gender = searchGender(genderId);
+        if (gender == null) {
+            gendes.add(new Gender(genderId, name));
+        } else {
+            throw new IllegalArgumentException("este genero esta agregado");
+        }
+    }
+
+    public Gender searchGender(int genderIdFind) {
+        for (Gender gender : gendes) {
+            if (gender.getGenderId() == genderIdFind) {
+                return gender;
+            }
+        }
+        return null;
+    }
+
+    // CRUD completo Class Platform
+    
+    public void registerPlatform(int plataformId, String name, float price) {
+        Platform platform = searchPlatform(plataformId);
+        if (platform == null) {
+            platforms.add(new Platform(plataformId, name, price));
+        } else {
+            throw new IllegalArgumentException("la pataforma ya esta asignada");
+        }
+    }
+
+    public Platform searchPlatform(int platformIdFind) {
+        for (Platform platmform : platforms) {
+            if (platmform.getPlataformId() == platformIdFind) {
+                return platform;
+            }
+
+        }
+        return null;
+    }
+
+    public void modifyPlatform(int plataformId, String name, float price) {
+        Platform platform = searchPlatform(id);
+        if (platform != null) {
+            platform.setName(name);
+            platform.setPrice(price);
+        }
+    }
+
+    public void deletePlatform(int id) {
+        Platform platform = searchPlatform(id);
+        if (platform != null) {
+            platforms.remove(platform);
+        } else {
+            throw new IllegalArgumentException("plataforma no encontrada");
+        }
+    }
+
+}
