@@ -30,6 +30,12 @@ Employee : Esta simplemente es la clase de un empleado.
 
 Inventary: En esta clase es donde se demostraran la cantidad de videojuegos separados por categoría y plataforma, la cantidad disponible de cada uno y tal vez el precio base se incluya en este, también se pueden separar en plataforma, usados o nuevos.
 
+Person : Esta clase se hizo con el objetivo de hacer herencia entre clases las cuales fueron la clase Employee y Customer ya que se leen "una persona es un empleado","una persona es un cliente" respectivamente.
+
+Platform :Esta clase se hizo para evitar y facilitar el proceso de agregación de plataformas en la tienda ya que esta función estaba dada por un enum porque los enums al ser constantes no deberían de cambiar pero en la vida real las plataformas avanzan y salen nuevas ,lo cual dificultaba esta función, por lo cual se decidió agregar esta clase de tipo plataforma.
+
+Gender : La clase Gender se hizo con el mismo propósito de la clase Platform agregar de forma mas sencilla nuevos géneros de videojuegos.
+
 DIAGRAMA DE CLASES
 
 ```mermaid
@@ -143,7 +149,6 @@ classDiagram
         }
 
   Store "1" --> "0..*" VideoGame 
-  Store "1" --> "0..*" Inventary
   Store "1" --> "0..*" Category
   Store "1" --> "0..*" Sale
   Store "1" --> "0..*" Employee
