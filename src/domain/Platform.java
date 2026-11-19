@@ -1,13 +1,13 @@
 package domain;
 
 public class Platform {
-    private final int plataformId;
+    private final int platformId;
     private String name;
     private float price;
 
 
-    public Platform(int plataformId,String name, float price){
-    this.plataformId=plataformId;
+    public Platform(int platformId,String name, float price){
+    this.platformId=platformId;
        setName(name); 
        setPrice(price);
     }
@@ -38,8 +38,8 @@ public class Platform {
     }
 
 
-    public int getPlataformId() {
-        return plataformId;
+    public int getplatformId() {
+        return platformId;
     }
 
 

@@ -247,10 +247,10 @@ public class Store {
 
     // CRUD completo Class Platform
     
-    public void registerPlatform(int plataformId, String name, float price) {
-        Platform platform = searchPlatform(plataformId);
+    public void registerPlatform(int platformId, String name, float price) {
+        Platform platform = searchPlatform(platformId);
         if (platform == null) {
-            platforms.add(new Platform(plataformId, name, price));
+            platforms.add(new Platform(platformId, name, price));
         } else {
             throw new IllegalArgumentException("la pataforma ya esta asignada");
         }
@@ -258,7 +258,7 @@ public class Store {
 
     public Platform searchPlatform(int platformIdFind) {
         for (Platform platmform : platforms) {
-            if (platmform.getPlataformId() == platformIdFind) {
+            if (platmform.getplatformId() == platformIdFind) {
                 return platform;
             }
 
@@ -266,7 +266,7 @@ public class Store {
         return null;
     }
 
-    public void modifyPlatform(int plataformId, String name, float price) {
+    public void modifyPlatform(int platformId, String name, float price) {
         Platform platform = searchPlatform(id);
         if (platform != null) {
             platform.setName(name);
