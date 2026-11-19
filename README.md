@@ -39,17 +39,19 @@ classDiagram
         -int id;
         -List <Sale> sales;
         -List <Receipt> receipts;
-        -List <Inventary> inventaries;
         -List <Employee> employees;
         -List <Customer> customers;
-        -List <Category> category;
+        -List <Category> categories;
         -List <VideoGame> videoGames;
+        -List <Gender> gendes;
+        -List <Platform> platforms;
         -VideoGame videoGame;
         -Employee employee;
         -Sale sale;
         -Customer customer;
         -Receipt receipt;
-        -Inventary inventary;
+        -Gender gender;
+        -Platform platform;
 
         +registerVideoGame () void;
         +searchVideoGame () VideoGame;
@@ -67,6 +69,12 @@ classDiagram
         +deleteCustomer () void;
         +registerReceipt () void
         +searchReceipt () Receipt;
+        +registerGende () void;
+        +searchGender () Gender;
+        +registerPlatform () void;
+        +searchPlatform () Platform;
+        +modifyPlatform () void;
+        +deletePlatform () void;
         }
   class VideoGame{
          <<abstract>> 
@@ -81,11 +89,21 @@ classDiagram
         +calculateSellingPrice () float*
         +calculateBasePrice () int
         +gameFormat () String*       
-  }
-
-  class Inventary{
-        -List<VideoGame>videogames;
         }
+
+  class Gender{
+        -final int genderId;
+        -String name;
+        }
+  class Platform{
+        -final int platformId;
+        -String name;
+        -float price;
+}
+  class Person{
+        -int id;
+        -String name;
+}
   class Category{
         -int categoryId;
         -String description;
@@ -100,12 +118,8 @@ classDiagram
         +totalPurchase () float;
       }
   class Employee{
-        -int employeeId;
-        -String employeeName;
       }
   class Customer{
-        -int Id;
-        -String name;
         -String phoneNumber;
         -String email;
       }
@@ -137,6 +151,7 @@ classDiagram
   Store "1" --> "0..*" Receipt
   Store "1" --> "0..*" PhysicalGame
   Store "1" --> "0..*" DigitalGame
+  Store "1" --> "0..*" Platform
 
   VideoGame <|-- DigitalGame
   VideoGame <|-- PhysicalGame
@@ -146,14 +161,16 @@ classDiagram
   Category "1" --> "0..*" PhysicalGame
   Category "1" --> "0..*" Sale
 
-  Inventary "1" --> "0..*" VideoGame
-  Inventary "1" --> "0..*" Sale
-  Inventary "1" --> "0..*" Receipt
+  Person <|-- Employee
+  Person <|-- Customer
 
   Sale "1" --> "1" Employee
   Sale "1" --> "1" Customer
+  Sale "1" --> "0..*" VideoGame
 
   Receipt "1" --> "1" Sale
+
+  Platform "1" --> "0..*" VideoGame
 
 
   
