@@ -6,8 +6,8 @@ public class DigitalGame extends VideoGame {
 
     // constructor de la clase
     public DigitalGame(int id, String title, String developer, int releaseYear, float basePrice,
-            Platform platform, boolean activate, float downloadSize, int availableLicenses) {
-        super(id, title, developer, releaseYear, basePrice, platform, activate);
+            Platform platform,Gender gender,boolean activate, float downloadSize, int availableLicenses) {
+        super(id, title, developer, releaseYear, basePrice, platform,gender, activate);
         setDownloadSize(downloadSize);
         setAvailableLicenses(availableLicenses);
 
@@ -53,7 +53,7 @@ public class DigitalGame extends VideoGame {
 
     @Override 
     public float calculateSellingPrice(){
-        return getBasePrice() + calculateBasePrice();
+        return calculatePriceAdjusted();
     }
     public String gameFormat(){
         return "Digital";

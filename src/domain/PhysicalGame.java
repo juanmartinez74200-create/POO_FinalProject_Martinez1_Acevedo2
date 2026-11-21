@@ -12,8 +12,8 @@ public class PhysicalGame extends VideoGame {
 
     // constructor de la clase
     public PhysicalGame(int Id, String title, String developer, int releaseYear, float basePrice,
-            Platform platform, boolean activate, int stock, String condition) {
-        super(Id, title, developer, releaseYear, basePrice, platform, activate);
+            Platform platform,Gender gender, boolean activate, int stock, String condition) {
+        super(Id, title, developer, releaseYear, basePrice, platform,gender, activate);
         setStock(stock);
        setCondition(Condition.valueOf(condition.toUpperCase())); //recibe NEW o USED
     }
@@ -54,12 +54,12 @@ public class PhysicalGame extends VideoGame {
 
     @Override 
     public float calculateSellingPrice(){
-        float price= getBasePrice() + calculateBasePrice();   //precio base del videojuego + precio de la plataforma                                                //precio de la plataforma
+        float price= calculatePriceAdjusted();   //precio base del videojuego + recargo de la plataforma +  recargo por genero                                               //precio de la plataforma
 
         if (condition==Condition.USED) {
             return price * 0.95f;       //descuento de el 5% si el videojuego es usado.
         }
-            return  price;
+        return  price;
     }
 
     public String gameFormat(){

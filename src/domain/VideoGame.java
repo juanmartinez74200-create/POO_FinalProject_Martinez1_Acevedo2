@@ -9,9 +9,11 @@ public abstract class VideoGame {
     private boolean activate;
 
     private Platform platform;
+    private Gender gender;
 
     // constructor
     public VideoGame(int id, String title, String developer, int releaseYear, float basePrice, Platform platform,
+            Gender gender,
             boolean activate) {
         setId(id);
         setTitle(title);
@@ -20,12 +22,20 @@ public abstract class VideoGame {
         setBasePrice(basePrice);
         setPlatform(platform);
         setActivate(activate);
-    
+
     }
 
     // getters y setters
     public Platform getPlatform() {
         return platform;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public void setPlatform(Platform platform) {
@@ -83,8 +93,10 @@ public abstract class VideoGame {
 
     public abstract float calculateSellingPrice();
 
-    public float calculateBasePrice() {
-       return platform.getPrice();
+    public float calculatePriceAdjusted() {
+        float chargePlataform = basePrice * platform.getSurchargePercentage();
+        float chargeGender = basePrice * gender.getSurchargePercentage();
+        return basePrice+chargePlataform+chargeGender;
     }
 
     public abstract String gameFormat();

@@ -2,6 +2,7 @@ package domain;
 
 import java.util.LinkedList;
 import java.util.List;
+// solucion static a final 
 
 public class Store {
     private static String storeName;
@@ -24,6 +25,7 @@ public class Store {
     private Receipt receipt;
     private Gender gerder;
     private Platform platform;
+    private Category category;
 
     // constructor vacio
     public Store() {
@@ -34,6 +36,7 @@ public class Store {
         receipts = new LinkedList<>();
         categories = new LinkedList<>();
         platforms = new LinkedList<>();
+        categories = new LinkedList<>();
     }
 
     // contructor de la clase con parametros
@@ -104,7 +107,8 @@ public class Store {
         }
     }
 
-    // CRUD completo de class Employe
+    // CRUD completo de class Employee
+
     public void registerEmployee(int employeeId, String employeeName) {
         Employee employee = searchEmployee(employeeId);
         if (employee == null) {
@@ -172,6 +176,7 @@ public class Store {
             throw new IllegalArgumentException("El cliente ya esta registrado");
         }
     }
+
     // CRUD completo class Customer
 
     public Customer searchCustomer(int idFind) {
@@ -227,10 +232,10 @@ public class Store {
 
     // CRUD parcial class Gender
 
-    public void registerGender(int genderId, String name) {
+    public void registerGender(int genderId, String name, float surchargePercentage) {
         Gender gender = searchGender(genderId);
         if (gender == null) {
-            gendes.add(new Gender(genderId, name));
+            gendes.add(new Gender(genderId, name, surchargePercentage));
         } else {
             throw new IllegalArgumentException("este genero esta agregado");
         }
@@ -246,7 +251,7 @@ public class Store {
     }
 
     // CRUD completo Class Platform
-    
+
     public void registerPlatform(int platformId, String name, float price) {
         Platform platform = searchPlatform(platformId);
         if (platform == null) {
@@ -266,11 +271,11 @@ public class Store {
         return null;
     }
 
-    public void modifyPlatform(int platformId, String name, float price) {
+    public void modifyPlatform(int platformId, String name, float surchargePercentage) {
         Platform platform = searchPlatform(id);
         if (platform != null) {
             platform.setName(name);
-            platform.setPrice(price);
+            platform.setSurchargePercentage(surchargePercentage);
         }
     }
 
@@ -283,4 +288,40 @@ public class Store {
         }
     }
 
+    // CRUD COPLETO CATEGORY
+
+    public Category searchCategory(int categoryIdFind) {
+        for (Category category : categories) {
+            if (category.getCategoryId() == categoryIdFind) {
+                return category;
+            }
+
+        }
+        return null;
+    }
+
+    public void registerCategory(int categoryId, Gender gender, String description) {
+        Category category = searchCategory(categoryId);
+        if (category != null) {
+            categories.add(new Category(categoryId, gender, description));
+        } else {
+            throw new IllegalArgumentException("esta categoria ya esta asignada");
+        }
+    }
+
+    public void modifyCategory(int categoryId, Gender gender, String description) {
+        Category category = searchCategory(categoryId);
+        if (category != null) {
+            category.setDescription(description);
+        }
+    }
+
+    public void deleteCategory(int categoryId) {
+        Category category = searchCategory(categoryId);
+        if (category != null) {
+            categories.remove(category);
+        }else{
+            throw new IllegalArgumentException("la categoria no existe");
+        }
+    }
 }
