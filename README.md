@@ -162,7 +162,7 @@ classDiagram
   VideoGame <|-- DigitalGame
   VideoGame <|-- PhysicalGame
   VideoGame "1" --> "0..*" Sale
-  VideoGmae "1" --> "1" Gender
+  VideoGame "1" --> "1" Gender
   VideoGame "1" --> "0..*" Platform
 
   Category "1" --> "0..*" DigitalGame
