@@ -162,6 +162,8 @@ classDiagram
   VideoGame <|-- DigitalGame
   VideoGame <|-- PhysicalGame
   VideoGame "1" --> "0..*" Sale
+  VideoGame "1" --> "1" Gender
+  VideoGame "1" --> "0..*" Platform
 
   Category "1" --> "0..*" DigitalGame
   Category "1" --> "0..*" PhysicalGame
@@ -175,10 +177,6 @@ classDiagram
   Sale "1" --> "0..*" VideoGame
 
   Receipt "1" --> "1" Sale
-
-  Platform "1" --> "0..*" VideoGame
-
-  Gender "1" --> "0..*" VideoGame
 
 
   
