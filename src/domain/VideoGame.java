@@ -1,6 +1,8 @@
 package domain;
 
-public abstract class VideoGame {
+import java.io.Serializable;
+
+public abstract class VideoGame implements Serializable {
     private int id;
     private String title;
     private String developer;

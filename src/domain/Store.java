@@ -2,9 +2,10 @@ package domain;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.io.Serializable;
 // solucion static a final 
 
-public class Store {
+public class Store implements Serializable{
     private static String storeName;
     private int id;
 

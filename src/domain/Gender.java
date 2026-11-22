@@ -1,6 +1,8 @@
 package domain;
 
-public class Gender {
+import java.io.Serializable;
+
+public class Gender implements Serializable{
     private final int genderId;
     private String name; 
     private float surchargePercentage;

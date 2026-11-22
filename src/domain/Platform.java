@@ -1,6 +1,8 @@
 package domain;
 
-public class Platform {
+import java.io.Serializable;
+
+public class Platform implements Serializable{
     private final int platformId;
     private String name;
     private float surchargePercentage;
