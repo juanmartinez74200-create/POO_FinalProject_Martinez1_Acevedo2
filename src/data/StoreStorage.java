@@ -1,7 +1,7 @@
 package data;
 
 import java.io.*;
-import domain.Store;;
+import domain.Store;
 
 public class StoreStorage {
     public static void save(Store store, String filename) {
