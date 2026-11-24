@@ -133,8 +133,8 @@ public class Store implements Serializable {
         }
     }
 
-    public void deleteEmployee(int employeeId) {
-        Employee employee = searchEmployee(employeeId);
+    public void deleteEmployee(int Id) {
+        Employee employee = searchEmployee(Id);
         if (employee != null) {
             employees.remove(employee);
         } else {
@@ -257,8 +257,8 @@ public class Store implements Serializable {
     }
 
     public Platform searchPlatform(int platformIdFind) {
-        for (Platform platmform : platforms) {
-            if (platmform.getplatformId() == platformIdFind) {
+        for (Platform platform : platforms) {
+            if (platform.getplatformId() == platformIdFind) {
                 return platform;
             }
 
