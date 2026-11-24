@@ -25,8 +25,12 @@ public class Sale implements Serializable{
     }
 
     public void setSaleId(int saleId) {
+     if (saleId >=0) {
         this.saleId = saleId;
+    }else {
+        throw new IllegalArgumentException("El id no puede ser negativo");
     }
+}
 
     public int getAmount() {
         return amount;

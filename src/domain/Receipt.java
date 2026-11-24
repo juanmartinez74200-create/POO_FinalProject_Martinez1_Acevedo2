@@ -28,7 +28,11 @@ public class Receipt implements Serializable{
     }
 
     public void setReceiptId(int receiptId) {
+       if (receiptId >= 0) {
         this.receiptId = receiptId;
+       }else{
+        throw new IllegalArgumentException("el id no puede ser negativo");
+       }
     }
     
 }
