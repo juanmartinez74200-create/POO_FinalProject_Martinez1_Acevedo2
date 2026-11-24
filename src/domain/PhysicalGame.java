@@ -64,7 +64,4 @@ public class PhysicalGame extends VideoGame implements Serializable {
         return  price;
     }
 
-    public String gameFormat(){
-        return "PHYSICAL";
-    };
 }

@@ -3,7 +3,7 @@ package domain;
 import java.util.LinkedList;
 import java.util.List;
 import java.io.Serializable;
-import domain.*;
+
 // solucion static a final 
 
 public class Store implements Serializable {
@@ -60,15 +60,25 @@ public class Store implements Serializable {
     // CRUDs completos y unos parciales
 
     // CRUD completo class VideoGame
-    public void registerVideoGame(int id, String title, String developer, int releaseYear, float basePrice, Platform platform,
-            Gender gender,boolean activate) {
-        VideoGame videoGame = searchVideoGame(id);
-        if( gameFormat().equals("PHYSICAL")){
-            videoGames.add(new PhysicalGame(id, title, developer, releaseYear, basePrice, platform, gender, activate, releaseYear, developer));
-        }else if(videoGame.gameFormat().equals("DIGITAL")){
-           videoGames.add(new DigitalGame(id, title, developer, releaseYear, basePrice, platform, gender, activate, basePrice, releaseYear));
-        }else {
-            throw new IllegalArgumentException("el videojuego ya existe");
+    public void registerPhysicalVideogame(int Id, String title, String developer, int releaseYear, float basePrice,
+            Platform platform, Gender gender, boolean activate, int stock, String condition) {
+        VideoGame videoGamePhy = searchVideoGame(Id);
+        if (videoGamePhy == null) {
+            videoGames.add(new PhysicalGame(Id, title, developer, releaseYear, basePrice, platform, gender, activate,
+                    stock, condition));
+        } else {
+            throw new IllegalArgumentException("el videojuego Fisico ya existe");
+        }
+    }
+
+    public void registerDigitalVideoGame(int id, String title, String developer, int releaseYear, float basePrice,
+            Platform platform, Gender gender, boolean activate, float downloadSize, int availableLicenses) {
+        VideoGame videoGameDi = searchVideoGame(id);
+        if (videoGameDi == null) {
+            videoGames.add(new DigitalGame(id, title, developer, releaseYear, basePrice, platform, gender, activate,
+                    downloadSize, availableLicenses));
+        } else {
+            throw new IllegalArgumentException("el videojuego digital ya existe");
         }
     }
 
@@ -81,15 +91,36 @@ public class Store implements Serializable {
         return null;
     }
 
-    public void modifyVideoGame(int id, String title, String developer, int releaseYear, float basePrice,
-            boolean activate) {
+    public void modifyPhysiscalVideoGame(int Id, String title, String developer, int releaseYear, float basePrice,
+            Platform platform, Gender gender, boolean activate, int stock, String condition) {
+        VideoGame videoGame = searchVideoGame(Id);
+        if (videoGame != null) {
+            if (videoGame instanceof PhysicalGame videoGamePhi) {
+                videoGamePhi.setActivate(activate);
+                videoGamePhi.setBasePrice(basePrice);
+                videoGamePhi.setStock(stock);
+            }else{
+                throw new IllegalArgumentException("El videojuego no es Fisico");
+            }
+        } else {
+            throw new IllegalArgumentException("No hay videojuego el cual fisico el cual modificar");
+        }
+    }
+
+    public void modifyDigitalVideoGame(int id, String title, String developer, int releaseYear, float basePrice,
+            Platform platform, Gender gender, boolean activate, float downloadSize, int availableLicenses) {
         VideoGame videoGame = searchVideoGame(id);
         if (videoGame != null) {
-            videoGame.setDeveloper(developer);
-            videoGame.setBasePrice(basePrice);
-            videoGame.setActivate(activate);
+            if (videoGame instanceof DigitalGame videoGameDi) {
+                videoGameDi.setAvailableLicenses(availableLicenses);
+                videoGameDi.setBasePrice(basePrice);
+                videoGameDi.setDownloadSize(downloadSize);
+                videoGameDi.setActivate(activate);
+            } else {
+                throw new IllegalArgumentException("El videojuego no es digital");
+            }
         } else {
-            throw new IllegalArgumentException("el videojuego no existe");
+            throw new IllegalArgumentException("no hay videojuago digital el cual modificar");
         }
     }
 
@@ -107,7 +138,7 @@ public class Store implements Serializable {
     public void registerEmployee(int id, String name) {
         Employee employee = searchEmployee(id);
         if (employee == null) {
-            employees.add(new Employee(id,name));
+            employees.add(new Employee(id, name));
 
         } else {
             throw new IllegalArgumentException("el empleado ya esta registrado");
