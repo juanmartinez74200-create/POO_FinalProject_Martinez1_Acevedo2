@@ -157,6 +157,49 @@ public class Main {
     }
 
 
+    private static void modifyPhysicalVideoGame(int id) {
+    String title = Console.readLine("Ingrese el nuevo título: ");
+    String developer = Console.readLine("Ingrese el nuevo desarrollador: ");
+    int releaseYear = Integer.parseInt(Console.readLine("Ingrese el nuevo año de lanzamiento: "));
+    float basePrice = Float.parseFloat(Console.readLine("Ingrese el nuevo precio base: "));
+
+    int platformId = Integer.parseInt(Console.readLine("Ingrese el ID de la nueva plataforma: "));
+    Platform platform = store.searchPlatform(platformId);
+
+    int genderId = Integer.parseInt(Console.readLine("Ingrese el ID del nuevo género: "));
+    Gender gender = store.searchGender(genderId);
+
+    boolean activate = Boolean.parseBoolean(Console.readLine("¿El videojuego está activo? (true/false): "));
+
+    int stock = Integer.parseInt(Console.readLine("Ingrese el nuevo stock: "));
+    String condition = Console.readLine("Ingrese la nueva condición (NEW o USED): ");
+
+    store.modifyPhysicalVideoGame(
+        id, title, developer, releaseYear, basePrice,
+        platform, gender, activate, stock, condition
+    );
+}
+
+    private static void modifyDigitalVideoGame(int id) {
+    String title = Console.readLine("Ingrese el nuevo título: ");
+    String developer = Console.readLine("Ingrese el nuevo desarrollador: ");
+    int releaseYear = Integer.parseInt(Console.readLine("Ingrese el nuevo año de lanzamiento: "));
+    float basePrice = Float.parseFloat(Console.readLine("Ingrese el nuevo precio base: "));
+
+    int platformId = Integer.parseInt(Console.readLine("Ingrese el ID de la nueva plataforma: "));
+    Platform platform = store.searchPlatform(platformId);
+
+    int genderId = Integer.parseInt(Console.readLine("Ingrese el ID del nuevo género: "));
+    Gender gender = store.searchGender(genderId);
+
+    boolean activate = Boolean.parseBoolean(Console.readLine("¿El videojuego está activo? (true/false): "));
+    float downloadSize = Float.parseFloat(Console.readLine("Ingrese el nuevo tamaño de descarga: "));
+    int availableLicenses = Integer.parseInt(Console.readLine("Ingrese la nueva cantidad de licencias: "));
+
+    store.modifyDigitalVideoGame(
+        id, title, developer, releaseYear, basePrice,
+        platform, gender, activate, downloadSize, availableLicenses);
+    }
 
     private static void deleteVideoGame(){
         int id = Integer.parseInt(Console.readLine("Ingrese el id del videojuego que desea eliminar"));
@@ -202,9 +245,15 @@ public class Main {
         int customerId = Integer.parseInt(Console.readLine("Ingrese el id de el cliente"));
        Customer customer = store.searchCustomer(customerId);
 
-        int videoGameId = 
+        int videoGameId = Integer. parseInt(Console.readLine("ingrese el id del videojuego"));
+        VideoGame videoGame = store.searchVideoGame(videoGameId);
 
+        if (employee !=null && customer !=null && videoGame !=null) {
         store.registerSale(SaleId, amount, employee, customer, videoGame);
+            Console.writeLine("Venta registrada correctamente");
+        }else {
+            Console.writeLine("No se pudo registrar la venta, verificar datos ingresados");
+        }
     }
 
     private static void searchSale(){
@@ -214,9 +263,9 @@ public class Main {
         if (sale != null) {
             Console.writeLine("Id de la venta: "+ sale.getSaleId());
             Console.writeLine("Cantidad: "+ sale.getAmount());
-            Console.writeLine("Empleado: "+ sale.getEmployee());
-            Console.writeLine("Cliente: "+ sale.getCustomer());
-            Console.writeLine("Videojuego: "+ sale.getVideoGame());
+            Console.writeLine("Empleado: "+ sale.getEmployee() .getName());
+            Console.writeLine("Cliente: "+ sale.getCustomer() .getName());
+            Console.writeLine("Videojuego: "+ sale.getVideoGame(). getTitle());
             Console.writeLine("Total: "+sale.totalPurchase());
         }else{
             Console.writeLine("venta no encontrado");
@@ -225,7 +274,7 @@ public class Main {
 
     private static void registerCustomer(){
         int id = Integer. parseInt(Console.readLine("Ingrese el id del cliente: "));
-        String name= Console.readLine("Ingres el numero del cliente: ");
+        String name= Console.readLine("Ingrese el nombre del cliente: ");
         String phoneNumber= Console.readLine("ingrese el numero de telefono de el cliente");
         String email= Console.readLine("Ingrese el email de el cliente");
         store.registerCustomer(id,name,phoneNumber,email);
@@ -264,11 +313,17 @@ public class Main {
         int id = Integer. parseInt(Console.readLine("Ingrese el id del recibo: "));
         int saleId = Integer. parseInt(Console.readLine("Ingrese el id de la venta: "));
         Sale sale = store.searchSale(saleId);
+
+        if (sale!= null) {
         store.registerReceipt(id,sale);
+        Console.writeLine("Recibo registrado correctamente");
+        }else{
+            Console.writeLine("No se encontro la venta");
+        }
     }
 
     private static void searchReceipt(){
-        int id = Integer. parseInt(Console.readLine("ingrese el id del empleado que desea buscar"));
+        int id = Integer. parseInt(Console.readLine("ingrese el id del recibo que desea buscar"));
         Receipt receipt = store.searchReceipt(id);  //guardar para poder mostrar el resultado 
 
         if (receipt != null) {
@@ -283,7 +338,7 @@ public class Main {
      private static void registerGender(){
         int id = Integer. parseInt(Console.readLine("Ingrese el id del genero: "));
         String name= Console.readLine("Ingrese el nombre del genero: ");
-        int surchargePercentage = Integer. parseInt(Console.readLine("ingrese el porcentaje adicional: "))
+        float surchargePercentage = Float. parseFloat(Console.readLine("ingrese el porcentaje adicional: "));
         store.registerGender(id, name, surchargePercentage);
     }
 
@@ -303,8 +358,8 @@ public class Main {
     private static void registerPlatform(){
         int id= Integer.parseInt(Console.readLine("registe el id de la plataforma"));
         String name= Console.readLine("ingrese el nombre de la pltaforma");
-        float price= Integer.parseInt(Console.readLine("ingrese el precio de la plataforma"));
-        store.registerPlatform(id, name, price);
+        float surchargePercentage= Integer.parseInt(Console.readLine("ingrese el precio de la plataforma"));
+        store.registerPlatform(id, name, surchargePercentage);
     }
     
      private static void searchPlatform(){
@@ -312,9 +367,9 @@ public class Main {
         Platform platform = store.searchPlatform(id);  //guardar para poder mostrar el resultado 
 
         if (platform != null) {
-            Console.writeLine("id: "+ platform.getplatformId());
+            Console.writeLine("id: "+ platform.getPlatformId());
             Console.writeLine("nombre: "+ platform.getName());
-            Console.writeLine("precio: "+ platform.getSurchargePercentage());
+            Console.writeLine("Porcentaje adicional: "+ platform.getSurchargePercentage());
         } else {
             Console.writeLine("Plataforma no encontrada");
         }
@@ -323,7 +378,7 @@ public class Main {
     private static void modifyPlatform(){
         int id = Integer. parseInt(Console.readLine("ingrese el id de la plataforma que desea modificar"));
         String name = Console.readLine("Ingrese el nuevo nombre");
-        float surchargePercentage=Integer. parseInt(Console.readLine("Ingrese el nuevo porcentaje"));
+        float surchargePercentage=Float. parseFloat(Console.readLine("Ingrese el nuevo porcentaje"));
         store.modifyPlatform(id, name, surchargePercentage);
     }
 
