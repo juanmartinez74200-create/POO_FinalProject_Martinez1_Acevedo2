@@ -15,8 +15,7 @@ public abstract class VideoGame implements Serializable {
 
     // constructor
     public VideoGame(int id, String title, String developer, int releaseYear, float basePrice, Platform platform,
-            Gender gender,
-            boolean activate) {
+            Gender gender,boolean activate) {
         setId(id);
         setTitle(title);
         setDeveloper(developer);

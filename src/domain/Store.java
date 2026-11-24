@@ -3,9 +3,10 @@ package domain;
 import java.util.LinkedList;
 import java.util.List;
 import java.io.Serializable;
+import domain.*;
 // solucion static a final 
 
-public class Store implements Serializable{
+public class Store implements Serializable {
     private static String storeName;
     private int id;
 
@@ -18,15 +19,6 @@ public class Store implements Serializable{
     private List<VideoGame> videoGames;
     private List<Gender> gendes;
     private List<Platform> platforms;
-
-    private VideoGame videoGame;
-    private Employee employee;
-    private Sale sale;
-    private Customer customer;
-    private Receipt receipt;
-    private Gender gerder;
-    private Platform platform;
-    private Category category;
 
     // constructor vacio
     public Store() {
@@ -68,13 +60,15 @@ public class Store implements Serializable{
     // CRUDs completos y unos parciales
 
     // CRUD completo class VideoGame
-    public void registerVideoGame(VideoGame videoGame) {
-        VideoGame existingGame = searchVideoGame(videoGame.getId());
-
-        if (existingGame == null) {
-            videoGames.add(videoGame);
-        } else {
-            throw new IllegalArgumentException("el videojuego ya esta registrado");
+    public void registerVideoGame(int id, String title, String developer, int releaseYear, float basePrice, Platform platform,
+            Gender gender,boolean activate) {
+        VideoGame videoGame = searchVideoGame(id);
+        if( gameFormat().equals("PHYSICAL")){
+            videoGames.add(new PhysicalGame(id, title, developer, releaseYear, basePrice, platform, gender, activate, releaseYear, developer));
+        }else if(videoGame.gameFormat().equals("DIGITAL")){
+           videoGames.add(new DigitalGame(id, title, developer, releaseYear, basePrice, platform, gender, activate, basePrice, releaseYear));
+        }else {
+            throw new IllegalArgumentException("el videojuego ya existe");
         }
     }
 
@@ -110,10 +104,10 @@ public class Store implements Serializable{
 
     // CRUD completo de class Employee
 
-    public void registerEmployee(int employeeId, String employeeName) {
-        Employee employee = searchEmployee(employeeId);
+    public void registerEmployee(int id, String name) {
+        Employee employee = searchEmployee(id);
         if (employee == null) {
-            employees.add(new Employee(employeeId, employeeName));
+            employees.add(new Employee(id,name));
 
         } else {
             throw new IllegalArgumentException("el empleado ya esta registrado");
@@ -321,7 +315,7 @@ public class Store implements Serializable{
         Category category = searchCategory(categoryId);
         if (category != null) {
             categories.remove(category);
-        }else{
+        } else {
             throw new IllegalArgumentException("la categoria no existe");
         }
     }

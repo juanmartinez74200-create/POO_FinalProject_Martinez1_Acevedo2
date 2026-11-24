@@ -1,6 +1,8 @@
 package domain;
 
-public class DigitalGame extends VideoGame {
+import java.io.Serializable;
+
+public class DigitalGame extends VideoGame implements Serializable {
     private float downloadSize;
     private int availableLicenses;
 
@@ -56,6 +58,6 @@ public class DigitalGame extends VideoGame {
         return calculatePriceAdjusted();
     }
     public String gameFormat(){
-        return "Digital";
+        return "DIGITAL";
     }
 }

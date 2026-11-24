@@ -1,8 +1,10 @@
 package domain;
 
+import java.io.Serializable;
+
 //import java.util.concurrent.locks.Condition; //ya tenemos un propio enum condition ¿eliminiar?
 
-public class PhysicalGame extends VideoGame {
+public class PhysicalGame extends VideoGame implements Serializable {
     private int stock;
     public enum Condition {
     NEW,
@@ -63,6 +65,6 @@ public class PhysicalGame extends VideoGame {
     }
 
     public String gameFormat(){
-        return "Fisico";
+        return "PHYSICAL";
     };
 }
