@@ -100,5 +100,5 @@ public abstract class VideoGame implements Serializable {
         return basePrice+chargePlataform+chargeGender;
     }
 
-    public abstract String gameFormat();
+
 }

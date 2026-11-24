@@ -57,7 +57,5 @@ public class DigitalGame extends VideoGame implements Serializable {
     public float calculateSellingPrice(){
         return calculatePriceAdjusted();
     }
-    public String gameFormat(){
-        return "DIGITAL";
-    }
+   
 }
