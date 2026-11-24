@@ -28,8 +28,8 @@ public class Store implements Serializable {
         customers = new LinkedList<>();
         receipts = new LinkedList<>();
         categories = new LinkedList<>();
-        platforms = new LinkedList<>();
-        categories = new LinkedList<>();
+        gendes = new LinkedList<>();
+        platforms = new LinkedList<>(); 
     }
 
     // contructor de la clase con parametros
@@ -91,14 +91,20 @@ public class Store implements Serializable {
         return null;
     }
 
-    public void modifyPhysiscalVideoGame(int Id, String title, String developer, int releaseYear, float basePrice,
+    public void modifyPhysicalVideoGame(int Id, String title, String developer, int releaseYear, float basePrice,
             Platform platform, Gender gender, boolean activate, int stock, String condition) {
         VideoGame videoGame = searchVideoGame(Id);
         if (videoGame != null) {
-            if (videoGame instanceof PhysicalGame videoGamePhi) {
-                videoGamePhi.setActivate(activate);
-                videoGamePhi.setBasePrice(basePrice);
-                videoGamePhi.setStock(stock);
+            if (videoGame instanceof PhysicalGame videoGamePhy) {
+                videoGamePhy.setTitle(title);
+                videoGamePhy.setDeveloper(developer);
+                videoGamePhy.setReleaseYear(releaseYear);
+                videoGamePhy.setBasePrice(basePrice);
+                videoGamePhy.setPlatform(platform);
+                videoGamePhy.setGender(gender);
+                videoGamePhy.setStock(stock);
+                videoGamePhy.setActivate(activate);
+                videoGamePhy.setCondition(PhysicalGame.Condition.valueOf(condition.toUpperCase()));
             }else{
                 throw new IllegalArgumentException("El videojuego no es Fisico");
             }

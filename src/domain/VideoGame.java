@@ -22,6 +22,7 @@ public abstract class VideoGame implements Serializable {
         setReleaseYear(releaseYear);
         setBasePrice(basePrice);
         setPlatform(platform);
+        setGender(gender);
         setActivate(activate);
 
     }
@@ -36,11 +37,19 @@ public abstract class VideoGame implements Serializable {
     }
 
     public void setGender(Gender gender) {
+        if (gender != null) {
         this.gender = gender;
+        }else{
+            throw new IllegalArgumentException("Debe seleccionar un genero");
+        }
     }
 
     public void setPlatform(Platform platform) {
-        this.platform = platform;
+       if (gender != null) {
+        this.platform = platform; 
+        }else{
+            throw new IllegalArgumentException("Debe seleccionar una plataforma");
+        }
     }
 
     public int getId() {
@@ -48,15 +57,23 @@ public abstract class VideoGame implements Serializable {
     }
 
     public void setId(int id) {
+       if (id >= 0) {
         this.id = id;
+       } else{
+        throw new IllegalArgumentException("el id no puede ser negativo");
+       }
     }
 
-    public String getTitle() {
+   public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        if (title != null && !title.trim().isEmpty()) {
+            this.title = title;
+        } else {
+            throw new IllegalArgumentException("El titulo es obligatorio");
+        }
     }
 
     public String getDeveloper() {
@@ -64,7 +81,11 @@ public abstract class VideoGame implements Serializable {
     }
 
     public void setDeveloper(String developer) {
-        this.developer = developer;
+        if (developer != null && !developer.trim().isEmpty()) {
+            this.developer = developer;
+        } else {
+            throw new IllegalArgumentException("El desarrollador es obligatorio");
+        }
     }
 
     public int getReleaseYear() {
@@ -72,7 +93,11 @@ public abstract class VideoGame implements Serializable {
     }
 
     public void setReleaseYear(int releaseYear) {
-        this.releaseYear = releaseYear;
+        if (releaseYear > 0) {
+            this.releaseYear = releaseYear;
+        } else {
+            throw new IllegalArgumentException("El año debe ser mayor a cero");
+        }
     }
 
     public float getBasePrice() {
@@ -80,7 +105,11 @@ public abstract class VideoGame implements Serializable {
     }
 
     public void setBasePrice(float basePrice) {
-        this.basePrice = basePrice;
+        if (basePrice >= 0) {
+            this.basePrice = basePrice;
+        } else {
+            throw new IllegalArgumentException("El precio no puede ser negativo");
+        }
     }
 
     public boolean getActivate() {
@@ -90,15 +119,15 @@ public abstract class VideoGame implements Serializable {
     public void setActivate(boolean activate) {
         this.activate = activate;
     }
-    // metodos
+
+    // Métodos
 
     public abstract float calculateSellingPrice();
-
     public float calculatePriceAdjusted() {
-        float chargePlataform = basePrice * platform.getSurchargePercentage();
-        float chargeGender = basePrice * gender.getSurchargePercentage();
-        return basePrice+chargePlataform+chargeGender;
-    }
 
+        float chargePlataform = basePrice * platform.getSurchargePercentage() / 100;
+        float chargeGender = basePrice * gender.getSurchargePercentage() / 100;
+        return basePrice + chargePlataform + chargeGender;
+    }
 
 }

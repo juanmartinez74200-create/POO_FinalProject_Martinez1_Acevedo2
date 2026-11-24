@@ -2,8 +2,6 @@ package domain;
 
 import java.io.Serializable;
 
-//import java.util.concurrent.locks.Condition; //ya tenemos un propio enum condition ¿eliminiar?
-
 public class PhysicalGame extends VideoGame implements Serializable {
     private int stock;
     public enum Condition {
@@ -39,7 +37,11 @@ public class PhysicalGame extends VideoGame implements Serializable {
     }
 
     public void setCondition(Condition condition) {
+        if (condition != null) {
         this.condition = condition;
+        } else{
+            throw new IllegalArgumentException("se debe seleccionar una condicion");
+        }
     }
 
     public void increaseStock() {
