@@ -37,11 +37,15 @@ public class Main {
                 case 20 -> searchPlatform();
                 case 21 -> modifyPlatform();
                 case 22 -> deletePlatform();
-                case 23 -> Console.writeLine("Exiting system...");              
+                case 23 -> searchCategory();
+                case 24 -> registerCategory();
+                case 25 -> modifyCategory();
+                case 26 -> deleteCategory();
+                case 27 -> Console.writeLine("Exiting system...");              
                 default -> Console.writeLine("invalid option. Try again ");
         
             }
-        } while (option != 23);
+        } while (option != 27);
     }
 
     private static void showMenu() {
@@ -385,6 +389,68 @@ public class Main {
     private static void deletePlatform(){
         int id= Integer.parseInt(Console.readLine("Ingrese el id de la plataforma que desea eliminar"));
         store.deletePlatform(id);
+    }
+
+    private static void registerCategory() {
+        int categoryId = Integer. parseInt(Console.readLine("ingresa el id de la categoria"));
+        int genderId = Integer. parseInt(Console.readLine("ingresa el id del genero: "));
+        Gender gender= store.searchGender(genderId);
+
+        if(gender != null){
+            String description = Console.readLine("Ingresa la descripcion de la categoria");
+            store.registerCategory(categoryId, gender, description);
+            Console.writeLine("Categoria registrada exitosamente");
+        }else{
+            Console.writeLine("La categoria no pudo registrarse");
+        }
+    }
+
+
+      private static void searchCategory(){
+        int id= Integer.parseInt(Console.readLine("ingrese el id de la categoria que desea buscar"));
+        Category category = store.searchCategory(id);
+
+        if (category != null) {
+            Console.writeLine("Id de la categoria: "+ category.getCategoryId());
+            Console.writeLine("Descripcion: "+ category.getDescription());
+            Console.writeLine("Genero: "+ category. getGender() .getName());
+        }else{
+            Console.writeLine("Categoria no encontrada");
+        }
+    }
+
+
+    private static void modifyCategory(){
+     int categoryId = Integer.parseInt(Console.readLine("Ingrese el id de la categoría:"));
+    Category category = store.searchCategory(categoryId);
+
+    if (category != null) {
+        int genderId = Integer.parseInt(
+            Console.readLine("Ingrese el nuevo id del género:"));
+            Gender gender = store.searchGender(genderId);
+        if (gender != null) {
+            String description = Console.readLine("Ingrese la nueva descripción de la categoría:");
+            store.modifyCategory(categoryId, gender, description);
+            Console.writeLine("Categoría modificada correctamente");
+        } else {
+            Console.writeLine("Género no encontrado");
+        }
+    } else {
+        Console.writeLine("Categoría no encontrada");
+    }
+}
+
+
+    private static void deleteCategory(){
+        int categoryId = Integer.parseInt(Console.readLine("Ingrese el id de la categoria que desea eliminar "));
+        Category category = store.searchCategory(categoryId);
+
+        if (category != null) {
+            store.deleteCategory(categoryId);
+            Console.writeLine("Categoria eliminada correctamente");
+        } else{
+            Console.writeLine("Categoria no encontrada");
+        }
     }
 }
 
