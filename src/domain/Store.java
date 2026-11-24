@@ -278,12 +278,12 @@ public class Store implements Serializable {
 
     // CRUD completo Class Platform
 
-    public void registerPlatform(int platformId, String name, float price) {
+    public void registerPlatform(int platformId, String name, float surchargePercentage) {
         Platform platform = searchPlatform(platformId);
         if (platform == null) {
-            platforms.add(new Platform(platformId, name, price));
+            platforms.add(new Platform(platformId, name, surchargePercentage));
         } else {
-            throw new IllegalArgumentException("la pataforma ya esta asignada");
+            throw new IllegalArgumentException("la plataforma ya esta asignada");
         }
     }
 

@@ -18,8 +18,12 @@ public class Platform implements Serializable{
     }
 
     public void setSurchargePercentage(float surchargePercentage) {
+        if (surchargePercentage >= 0) {
         this.surchargePercentage = surchargePercentage;
-    }
+    } else{
+        throw new IllegalArgumentException("El porcentaje adicional no puede ser negativo");
+        }
+    }   
 
     public String getName() {
         return name;
@@ -33,7 +37,7 @@ public class Platform implements Serializable{
         }
     }
 
-    public int getplatformId() {
+    public int getPlatformId() {
         return platformId;
     }
 
