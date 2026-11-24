@@ -15,9 +15,9 @@ public class Main {
             option=Integer.parseInt(Console.readLine("select option"));
             
             switch (option) {
-                case 1 -> store.registerVideoGame(null);
-                case 2 -> store.searchVideoGame(option);
-                case 3 -> store.modifyVideoGame();
+                case 1 -> registerVideoGame();
+                case 2 -> searchVideoGame();
+                case 3 -> modifyVideoGame();
                 case 4 -> deleteVideoGame();
                 case 5 -> registerEmployee();
                 case 6 -> searchEmployee();
@@ -43,6 +43,120 @@ public class Main {
             }
         } while (option != 23);
     }
+
+    private static void showMenu() {
+    Console.writeLine("===== THE GAMINGZONE =====");
+    Console.writeLine("1. Registrar videojuego");
+    Console.writeLine("2. Buscar videojuego");
+    Console.writeLine("3. Modificar videojuego");
+    Console.writeLine("4. Eliminar videojuego");
+    Console.writeLine("5. Registrar empleado");
+    Console.writeLine("6. Buscar empleado");
+    Console.writeLine("7. Modificar empleado");
+    Console.writeLine("8. Eliminar empleado");
+    Console.writeLine("9. Registrar venta");
+    Console.writeLine("10. Buscar venta");
+    Console.writeLine("11. Registrar cliente");
+    Console.writeLine("12. Buscar cliente");
+    Console.writeLine("13. Modificar cliente");
+    Console.writeLine("14. Eliminar cliente");
+    Console.writeLine("15. Registrar recibo");
+    Console.writeLine("16. Buscar recibo");
+    Console.writeLine("17. Registrar género");
+    Console.writeLine("18. Buscar género");
+    Console.writeLine("19. Registrar plataforma");
+    Console.writeLine("20. Buscar plataforma");
+    Console.writeLine("21. Modificar plataforma");
+    Console.writeLine("22. Eliminar plataforma");
+    Console.writeLine("23. Salir");
+}
+
+    private static void registerVideoGame(){
+        Console.writeLine("1. Videojuego fisico");
+        Console.writeLine("2. Videojuego digital");
+
+        int option = Integer.parseInt(Console.readLine("Selecciona el tipo de juego"));
+
+        switch (option) {
+            case 1 -> registerPhysicalVideoGame();
+            case 2 -> registerDigitalVideoGame();
+            default -> Console.writeLine("Opcion invalida");
+        }
+    }
+
+
+    private static void registerPhysicalVideoGame() {
+    int id = Integer.parseInt(Console.readLine("Ingrese el id: "));
+    String title = Console.readLine("Ingrese el título: ");
+    String developer = Console.readLine("Ingrese el desarrollador: ");
+    int releaseYear = Integer.parseInt(Console.readLine("Ingrese el año de lanzamiento: "));
+    float basePrice = Float.parseFloat(Console.readLine("Ingrese el precio base: "));
+    int platformId = Integer.parseInt(Console.readLine("Ingrese el id de la plataforma: "));
+    Platform platform = store.searchPlatform(platformId);
+    int genderId = Integer.parseInt(Console.readLine("Ingrese el id del género: "));
+    Gender gender = store.searchGender(genderId);
+    boolean activate = Boolean.parseBoolean(Console.readLine("¿El videojuego esta activado?"));
+    int stock = Integer.parseInt(Console.readLine("Ingrese el stock: "));
+    String condition = Console.readLine("Ingrese la condición (NEW o USED): ");
+
+    store.registerPhysicalVideogame(id, title, developer, releaseYear, basePrice,platform, gender,
+    activate,stock, condition);
+    }
+
+
+    private static void registerDigitalVideoGame() {
+    int id = Integer.parseInt(Console.readLine("Ingrese el id: "));
+    String title = Console.readLine("Ingrese el título: ");
+    String developer = Console.readLine("Ingrese el desarrollador: ");
+    int releaseYear = Integer.parseInt(Console.readLine("Ingrese el año de lanzamiento: "));
+    float basePrice = Float.parseFloat(Console.readLine("Ingrese el precio base: "));
+
+    int platformId = Integer.parseInt(Console.readLine("Ingrese el id de la plataforma: "));
+    Platform platform = store.searchPlatform(platformId);
+
+    int genderId = Integer.parseInt(Console.readLine("Ingrese el id del género: "));
+    Gender gender = store.searchGender(genderId);
+
+    boolean activate = Boolean.parseBoolean(Console.readLine("¿El videojuego está activo? (true/false): "));
+    float downloadSize = Float.parseFloat(Console.readLine("Ingrese el tamaño de descarga: "));
+    int availableLicenses = Integer.parseInt(Console.readLine("Ingrese la cantidad de licencias disponibles: "));
+
+    store.registerDigitalVideoGame(id, title, developer, releaseYear, basePrice,
+        platform, gender, activate, downloadSize, availableLicenses);
+    }
+
+
+    private static void searchVideoGame() {
+    int id = Integer.parseInt(Console.readLine("Ingrese el id del videojuego que desea buscar: "));
+    VideoGame videoGame = store.searchVideoGame(id);
+
+    if (videoGame != null) {
+        Console.writeLine("id: " + videoGame.getId());
+        Console.writeLine("Título: " + videoGame.getTitle());
+        Console.writeLine("Desarrollador: " + videoGame.getDeveloper());
+        Console.writeLine("Año de lanzamiento: " + videoGame.getReleaseYear());
+        Console.writeLine("Precio base: " + videoGame.getBasePrice());
+        Console.writeLine("Precio de venta: " + videoGame.calculateSellingPrice());
+    } else {
+        Console.writeLine("Videojuego no encontrado");
+    }
+}
+    private static void modifyVideoGame(){
+        int id = Integer.parseInt(Console.readLine("ingrese el id del videojuego que deea modificar: "));
+        VideoGame videoGame = store.searchVideoGame(id);
+
+        if (videoGame != null){
+            if (videoGame instanceof PhysicalGame){
+                modifyPhysicalVideoGame(id);
+            }else if (videoGame instanceof DigitalGame){
+                modifyDigitalVideoGame(id);
+            }
+        } else{
+            Console.writeLine("Videojuego no encontrado");
+        }
+    }
+
+
 
     private static void deleteVideoGame(){
         int id = Integer.parseInt(Console.readLine("Ingrese el id del videojuego que desea eliminar"));
