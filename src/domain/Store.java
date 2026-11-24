@@ -78,7 +78,7 @@ public class Store implements Serializable {
             videoGames.add(new DigitalGame(id, title, developer, releaseYear, basePrice, platform, gender, activate,
                     downloadSize, availableLicenses));
         } else {
-            throw new IllegalArgumentException("el videojuego digital ya existe");
+            throw new IllegalArgumentException("el videojuego Digital ya existe");
         }
     }
 
