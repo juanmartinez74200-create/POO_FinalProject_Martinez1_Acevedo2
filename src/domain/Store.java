@@ -118,10 +118,15 @@ public class Store implements Serializable {
         VideoGame videoGame = searchVideoGame(id);
         if (videoGame != null) {
             if (videoGame instanceof DigitalGame videoGameDi) {
-                videoGameDi.setAvailableLicenses(availableLicenses);
-                videoGameDi.setBasePrice(basePrice);
-                videoGameDi.setDownloadSize(downloadSize);
-                videoGameDi.setActivate(activate);
+             videoGameDi.setTitle(title);
+             videoGameDi.setDeveloper(developer);
+             videoGameDi.setReleaseYear(releaseYear);
+             videoGameDi.setBasePrice(basePrice);
+             videoGameDi.setPlatform(platform);
+             videoGameDi.setGender(gender);
+             videoGameDi.setActivate(activate);
+             videoGameDi.setDownloadSize(downloadSize);
+             videoGameDi.setAvailableLicenses(availableLicenses);
             } else {
                 throw new IllegalArgumentException("El videojuego no es digital");
             }
@@ -295,7 +300,7 @@ public class Store implements Serializable {
 
     public Platform searchPlatform(int platformIdFind) {
         for (Platform platform : platforms) {
-            if (platform.getplatformId() == platformIdFind) {
+            if (platform.getPlatformId() == platformIdFind) {
                 return platform;
             }
 
@@ -304,10 +309,12 @@ public class Store implements Serializable {
     }
 
     public void modifyPlatform(int platformId, String name, float surchargePercentage) {
-        Platform platform = searchPlatform(id);
+        Platform platform = searchPlatform(platformId);
         if (platform != null) {
             platform.setName(name);
             platform.setSurchargePercentage(surchargePercentage);
+        } else{
+            throw new IllegalArgumentException("La plataforma no existe");
         }
     }
 
@@ -334,7 +341,7 @@ public class Store implements Serializable {
 
     public void registerCategory(int categoryId, Gender gender, String description) {
         Category category = searchCategory(categoryId);
-        if (category != null) {
+        if (category == null) {
             categories.add(new Category(categoryId, gender, description));
         } else {
             throw new IllegalArgumentException("esta categoria ya esta asignada");
@@ -344,7 +351,10 @@ public class Store implements Serializable {
     public void modifyCategory(int categoryId, Gender gender, String description) {
         Category category = searchCategory(categoryId);
         if (category != null) {
+            category.setGender(gender);
             category.setDescription(description);
+        } else{
+            throw new IllegalArgumentException("La categoria no existe");
         }
     }
 
