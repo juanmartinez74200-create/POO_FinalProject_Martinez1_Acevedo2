@@ -19,7 +19,7 @@ public class Platform implements Serializable{
 
     public void setSurchargePercentage(float surchargePercentage) {
         if (surchargePercentage >= 0) {
-        this.surchargePercentage = surchargePercentage;
+        this.surchargePercentage=surchargePercentage;
     } else{
         throw new IllegalArgumentException("El porcentaje adicional no puede ser negativo");
         }

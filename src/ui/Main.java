@@ -1,9 +1,9 @@
 package ui;
 
+import data.StoreStorage;
 import domain.*;
 import utils.Console;
-import data.StoreStorage;
-
+import data.*;
 public class Main {
     private static final String FILE_NAME = "store.csv";
     private static  Store store = new Store(0, "The GamingZone");
@@ -15,42 +15,40 @@ public class Main {
             option=Integer.parseInt(Console.readLine("select option"));
             
             switch (option) {
-                case 1 -> store.registerPhysicalVideogame(option, FILE_NAME, FILE_NAME, option, option, null, null,false, option, FILE_NAME);
-                case 2 -> store.registerDigitalVideoGame(option, FILE_NAME, FILE_NAME, option, option, null, null,false, option, option);
-                case 3 -> store.searchVideoGame(option);
-                case 4 -> store.modifyPhysicalVideoGame(option, FILE_NAME, FILE_NAME, option, option, null, null, false, option, FILE_NAME);
-                case 5 -> store.modifyDigitalVideoGame(option, FILE_NAME, FILE_NAME, option, option, null, null, false,option, option);
-                case 6 -> store.deleteVideoGame(option);
-                case 7 -> store.registerEmployee(option, FILE_NAME);
-                case 8 -> store.searchEmployee(option);
-                case 9 -> store.modifyEmployee(option, FILE_NAME);
-                case 10 -> store.deleteEmployee(option);
-                case 11 -> store.registerSale(option, option, null, null, null);
-                case 12 -> store.searchSale(option);
-                case 13 -> store.registerCustomer(option, FILE_NAME, FILE_NAME, FILE_NAME);
-                case 14 -> store.searchCustomer(option);
-                case 15 -> store.modifyCustomer(option, FILE_NAME, FILE_NAME, FILE_NAME);
-                case 16 -> store.deleteCustomer(option);
-                case 17 -> store.registerReceipt(option, null);
-                case 18 -> store.searchReceipt(option);
-                case 19 -> store.registerGender(option, FILE_NAME, option);
-                case 20 -> store.searchGender(option);
-                case 21 -> store.registerPlatform(option, FILE_NAME, option);
-                case 22 -> store.searchPlatform(option);
-                case 23 -> store.modifyPlatform(option, FILE_NAME, option);
-                case 24 -> store.deletePlatform(option);
-                case 25 -> store.registerCategory(option, null, FILE_NAME);
-                case 26 -> store.searchCategory(option);
-                case 27 -> store.modifyCategory(option, null, FILE_NAME);
-                case 28 -> store.deleteCategory(option);
+                case 1 -> registerVideoGame();
+                case 2 -> searchVideoGame();
+                case 3 -> modifyVideoGame();
+                case 4 -> deleteVideoGame();
+                case 5 -> registerEmployee();
+                case 6 -> searchEmployee();
+                case 7 -> modifyEmployee();
+                case 8 -> deleteEmployee();
+                case 9 -> registerSale();
+                case 10 -> searchSale();
+                case 11 -> registerCustomer();
+                case 12 -> searchCustomer();
+                case 13 -> modifyCustomer();
+                case 14 -> deleteCustomer();
+                case 15 -> registerReceipt();
+                case 16 -> searchReceipt();
+                case 17 -> registerGender();
+                case 18 -> searchGender();
+                case 19 -> registerPlatform();
+                case 20 -> searchPlatform();
+                case 21 -> modifyPlatform();
+                case 22 -> deletePlatform();
+                case 23 -> registerCategory();
+                case 24 -> searchCategory();
+                case 25 -> modifyCategory();
+                case 26 -> deleteCategory();
+                case 27 -> storeSave();
+                case 28 -> storeLoad();
                 case 29 -> Console.writeLine("Exiting system...");
                 default -> Console.writeLine("invalid option. Try again ");
 
             }
         
-        } while (option != 29);
-        
-        
+        } while (option != 29); 
     }
 
     private static void showMenu() {
@@ -77,8 +75,25 @@ public class Main {
     Console.writeLine("20. Buscar plataforma");
     Console.writeLine("21. Modificar plataforma");
     Console.writeLine("22. Eliminar plataforma");
-    Console.writeLine("23. Salir");
+    Console.writeLine("23. Registrar una categoria");
+    Console.writeLine("24, Buscar un videojuego");
+    Console.writeLine("25, Modificar categoria");
+    Console.writeLine("26, Eliminar Categoria");
+    Console.writeLine("27, Guardar");
+    Console.writeLine("28, Cargar ");
+    Console.writeLine("========================");
 }
+
+    private static void storeSave(){
+        StoreStorage.save(store, FILE_NAME);
+    }
+    private static void storeLoad(){
+        Store load = StoreStorage.load(FILE_NAME);
+        if (load != null){
+            store = load;
+            Console.writeLine("Datos Cargados Correctamente");
+        }
+    }
 
     private static void registerVideoGame(){
         Console.writeLine("1. Videojuego fisico");
@@ -104,7 +119,7 @@ public class Main {
     Platform platform = store.searchPlatform(platformId);
     int genderId = Integer.parseInt(Console.readLine("Ingrese el id del género: "));
     Gender gender = store.searchGender(genderId);
-    boolean activate = Boolean.parseBoolean(Console.readLine("¿El videojuego esta activado?"));
+    boolean activate = Boolean.parseBoolean(Console.readLine("¿El videojuego esta activado? (true/false) " ));
     int stock = Integer.parseInt(Console.readLine("Ingrese el stock: "));
     String condition = Console.readLine("Ingrese la condición (NEW o USED): ");
 
@@ -127,7 +142,7 @@ public class Main {
     Gender gender = store.searchGender(genderId);
 
     boolean activate = Boolean.parseBoolean(Console.readLine("¿El videojuego está activo? (true/false): "));
-    float downloadSize = Float.parseFloat(Console.readLine("Ingrese el tamaño de descarga: "));
+    float downloadSize = Float.parseFloat(Console.readLine("Ingrese el tamaño de descarga: " + "GB"));
     int availableLicenses = Integer.parseInt(Console.readLine("Ingrese la cantidad de licencias disponibles: "));
 
     store.registerDigitalVideoGame(id, title, developer, releaseYear, basePrice,
@@ -152,22 +167,17 @@ public class Main {
 }
     private static void modifyVideoGame(){
         int id = Integer.parseInt(Console.readLine("ingrese el id del videojuego que deea modificar: "));
-        int option = Integer.parseInt("");
         VideoGame videoGame = store.searchVideoGame(id);
-
-        switch (option) {
-            case 4 ->{
-                if (videoGame instanceof PhysicalGame) {
-                    store.modifyPhysicalVideoGame(id, FILE_NAME, FILE_NAME, option, id, null, null, false, option, FILE_NAME);
-                }
+        if (videoGame!=null) {
+            if(videoGame instanceof PhysicalGame){
+                modifyPhysicalVideoGame(id);
+            }else if (videoGame instanceof DigitalGame) {
+                modifyDigitalVideoGame(id);
             }
-            case 5 ->{
-                if (videoGame instanceof DigitalGame) {
-                    store.modifyDigitalVideoGame(id, FILE_NAME, FILE_NAME, option, option, null, null, false, id, option);
-                }
-            }
-            default -> Console.writeLine("INVALIDO");
+        }else{
+            Console.writeLine("no hay videojuego con ese id");
         }
+
     }
 
 
@@ -371,8 +381,8 @@ public class Main {
 
     private static void registerPlatform(){
         int id= Integer.parseInt(Console.readLine("registe el id de la plataforma"));
-        String name= Console.readLine("ingrese el nombre de la pltaforma");
-        float surchargePercentage= Integer.parseInt(Console.readLine("ingrese el precio de la plataforma"));
+        String name= Console.readLine("ingrese el nombre de la plataforma");
+        float surchargePercentage= Float.parseFloat(Console.readLine("ingrese el porcentaje de recargo de la plataforma"));
         store.registerPlatform(id, name, surchargePercentage);
     }
     
