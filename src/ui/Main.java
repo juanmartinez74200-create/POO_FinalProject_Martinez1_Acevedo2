@@ -15,15 +15,11 @@ public class Main {
             option=Integer.parseInt(Console.readLine("select option"));
             
             switch (option) {
-                case 1 -> store.registerPhysicalVideogame(option, FILE_NAME, FILE_NAME, option, option, null, null,
-                        false, option, FILE_NAME);
-                case 2 -> store.registerDigitalVideoGame(option, FILE_NAME, FILE_NAME, option, option, null, null,
-                        false, option, option);
+                case 1 -> store.registerPhysicalVideogame(option, FILE_NAME, FILE_NAME, option, option, null, null,false, option, FILE_NAME);
+                case 2 -> store.registerDigitalVideoGame(option, FILE_NAME, FILE_NAME, option, option, null, null,false, option, option);
                 case 3 -> store.searchVideoGame(option);
-                case 4 -> store.modifyPhysicalVideoGame(option, FILE_NAME, FILE_NAME, option, option, null, null, false,
-                        option, FILE_NAME);
-                case 5 -> store.modifyDigitalVideoGame(option, FILE_NAME, FILE_NAME, option, option, null, null, false,
-                        option, option);
+                case 4 -> store.modifyPhysicalVideoGame(option, FILE_NAME, FILE_NAME, option, option, null, null, false, option, FILE_NAME);
+                case 5 -> store.modifyDigitalVideoGame(option, FILE_NAME, FILE_NAME, option, option, null, null, false,option, option);
                 case 6 -> store.deleteVideoGame(option);
                 case 7 -> store.registerEmployee(option, FILE_NAME);
                 case 8 -> store.searchEmployee(option);
@@ -156,16 +152,21 @@ public class Main {
 }
     private static void modifyVideoGame(){
         int id = Integer.parseInt(Console.readLine("ingrese el id del videojuego que deea modificar: "));
+        int option = Integer.parseInt("");
         VideoGame videoGame = store.searchVideoGame(id);
 
-        if (videoGame != null){
-            if (videoGame instanceof PhysicalGame){
-                modifyPhysicalVideoGame(id);
-            }else if (videoGame instanceof DigitalGame){
-                modifyDigitalVideoGame(id);
+        switch (option) {
+            case 4 ->{
+                if (videoGame instanceof PhysicalGame) {
+                    store.modifyPhysicalVideoGame(id, FILE_NAME, FILE_NAME, option, id, null, null, false, option, FILE_NAME);
+                }
             }
-        } else{
-            Console.writeLine("Videojuego no encontrado");
+            case 5 ->{
+                if (videoGame instanceof DigitalGame) {
+                    store.modifyDigitalVideoGame(id, FILE_NAME, FILE_NAME, option, option, null, null, false, id, option);
+                }
+            }
+            default -> Console.writeLine("INVALIDO");
         }
     }
 
