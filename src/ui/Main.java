@@ -15,37 +15,46 @@ public class Main {
             option=Integer.parseInt(Console.readLine("select option"));
             
             switch (option) {
-                case 1 -> registerVideoGame();
-                case 2 -> searchVideoGame();
-                case 3 -> modifyVideoGame();
-                case 4 -> deleteVideoGame();
-                case 5 -> registerEmployee();
-                case 6 -> searchEmployee();
-                case 7 -> modifyEmployee();
-                case 8 -> deleteEmployee();
-                case 9 -> registerSale();
-                case 10 -> searchSale();
-                case 11 -> registerCustomer();
-                case 12 -> searchCustomer();
-                case 13 -> modifyCustomer ();
-                case 14 -> deleteCustomer();
-                case 15 -> registerReceipt();
-                case 16 -> searchReceipt();
-                case 17 -> registerGender();
-                case 18 -> searchGender();
-                case 19 -> registerPlatform();
-                case 20 -> searchPlatform();
-                case 21 -> modifyPlatform();
-                case 22 -> deletePlatform();
-                case 23 -> searchCategory();
-                case 24 -> registerCategory();
-                case 25 -> modifyCategory();
-                case 26 -> deleteCategory();
-                case 27 -> Console.writeLine("Exiting system...");              
+                case 1 -> store.registerPhysicalVideogame(option, FILE_NAME, FILE_NAME, option, option, null, null,
+                        false, option, FILE_NAME);
+                case 2 -> store.registerDigitalVideoGame(option, FILE_NAME, FILE_NAME, option, option, null, null,
+                        false, option, option);
+                case 3 -> store.searchVideoGame(option);
+                case 4 -> store.modifyPhysicalVideoGame(option, FILE_NAME, FILE_NAME, option, option, null, null, false,
+                        option, FILE_NAME);
+                case 5 -> store.modifyDigitalVideoGame(option, FILE_NAME, FILE_NAME, option, option, null, null, false,
+                        option, option);
+                case 6 -> store.deleteVideoGame(option);
+                case 7 -> store.registerEmployee(option, FILE_NAME);
+                case 8 -> store.searchEmployee(option);
+                case 9 -> store.modifyEmployee(option, FILE_NAME);
+                case 10 -> store.deleteEmployee(option);
+                case 11 -> store.registerSale(option, option, null, null, null);
+                case 12 -> store.searchSale(option);
+                case 13 -> store.registerCustomer(option, FILE_NAME, FILE_NAME, FILE_NAME);
+                case 14 -> store.searchCustomer(option);
+                case 15 -> store.modifyCustomer(option, FILE_NAME, FILE_NAME, FILE_NAME);
+                case 16 -> store.deleteCustomer(option);
+                case 17 -> store.registerReceipt(option, null);
+                case 18 -> store.searchReceipt(option);
+                case 19 -> store.registerGender(option, FILE_NAME, option);
+                case 20 -> store.searchGender(option);
+                case 21 -> store.registerPlatform(option, FILE_NAME, option);
+                case 22 -> store.searchPlatform(option);
+                case 23 -> store.modifyPlatform(option, FILE_NAME, option);
+                case 24 -> store.deletePlatform(option);
+                case 25 -> store.registerCategory(option, null, FILE_NAME);
+                case 26 -> store.searchCategory(option);
+                case 27 -> store.modifyCategory(option, null, FILE_NAME);
+                case 28 -> store.deleteCategory(option);
+                case 29 -> Console.writeLine("Exiting system...");
                 default -> Console.writeLine("invalid option. Try again ");
-        
+
             }
-        } while (option != 27);
+        
+        } while (option != 29);
+        
+        
     }
 
     private static void showMenu() {

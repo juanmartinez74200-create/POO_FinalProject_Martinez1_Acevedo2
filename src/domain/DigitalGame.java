@@ -1,8 +1,6 @@
 package domain;
 
-import java.io.Serializable;
-
-public class DigitalGame extends VideoGame implements Serializable {
+public class DigitalGame extends VideoGame  {
     private float downloadSize;
     private int availableLicenses;
 

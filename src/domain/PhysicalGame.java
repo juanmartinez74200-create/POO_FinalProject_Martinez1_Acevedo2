@@ -1,8 +1,6 @@
 package domain;
 
-import java.io.Serializable;
-
-public class PhysicalGame extends VideoGame implements Serializable {
+public class PhysicalGame extends VideoGame  {
     private int stock;
     public enum Condition {
     NEW,
