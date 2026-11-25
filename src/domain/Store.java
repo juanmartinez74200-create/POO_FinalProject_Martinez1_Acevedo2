@@ -59,7 +59,7 @@ public class Store implements Serializable {
 
     // CRUDs completos y unos parciales
 
-    // CRUD completo class VideoGame
+    // CRUD completo class VideoGame y mostrar lista
     public void registerPhysicalVideogame(int Id, String title, String developer, int releaseYear, float basePrice,
             Platform platform, Gender gender, boolean activate, int stock, String condition) {
         VideoGame videoGamePhy = searchVideoGame(Id);

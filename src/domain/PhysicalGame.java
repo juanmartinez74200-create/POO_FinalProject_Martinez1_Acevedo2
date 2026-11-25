@@ -2,6 +2,7 @@ package domain;
 
 public class PhysicalGame extends VideoGame  {
     private int stock;
+    
     public enum Condition {
     NEW,
     USED

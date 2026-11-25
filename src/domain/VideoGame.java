@@ -45,7 +45,7 @@ public abstract class VideoGame implements Serializable {
     }
 
     public void setPlatform(Platform platform) {
-       if (gender != null) {
+       if (platform != null) {
         this.platform = platform; 
         }else{
             throw new IllegalArgumentException("Debe seleccionar una plataforma");

@@ -81,6 +81,7 @@ public class Main {
     Console.writeLine("26, Eliminar Categoria");
     Console.writeLine("27, Guardar");
     Console.writeLine("28, Cargar ");
+    Console.writeLine("29, Salir");
     Console.writeLine("========================");
 }
 
@@ -161,6 +162,13 @@ public class Main {
         Console.writeLine("Año de lanzamiento: " + videoGame.getReleaseYear());
         Console.writeLine("Precio base: " + videoGame.getBasePrice());
         Console.writeLine("Precio de venta: " + videoGame.calculateSellingPrice());
+        if (videoGame instanceof PhysicalGame physical) {
+            Console.writeLine("La condicion es :"+ physical.getCondition());
+            Console.writeLine("La cantidad de stock es :"+ physical.getStock());
+        }else if (videoGame instanceof DigitalGame digital) {
+            Console.writeLine("El peso del Videojuego :"+ digital.getDownloadSize());
+            Console.writeLine("La cantidad de licencias disponibles :"+ digital.getAvailableLicenses());
+        }    
     } else {
         Console.writeLine("Videojuego no encontrado");
     }
