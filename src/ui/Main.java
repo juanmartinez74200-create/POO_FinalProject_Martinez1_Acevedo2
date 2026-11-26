@@ -409,9 +409,9 @@ public class Main {
 
     private static void modifyCustomer() {
         int id = 0;
-        String name;
-        String phoneNumber;
-        String email;
+        String name = "";
+        String phoneNumber= "";
+        String email ="";
 
         id = Integer.parseInt(Console.readLine("ingrese el id del cliente que desea modificar"));
         name = Console.readLine("Ingrese el nuevo nombre");
@@ -422,86 +422,117 @@ public class Main {
     }
 
     private static void deleteCustomer() {
-        int id = Integer.parseInt(Console.readLine("Ingrese el id de el cliente que desea eliminar"));
+        int id = 0; 
+        id = Integer.parseInt(Console.readLine("Ingrese el id de el cliente que desea eliminar"));
         store.deleteCustomer(id);
     }
 
     private static void registerReceipt() {
-        int id = Integer.parseInt(Console.readLine("Ingrese el id del recibo: "));
-        int saleId = Integer.parseInt(Console.readLine("Ingrese el id de la venta: "));
-        Sale sale = store.searchSale(saleId);
+        int id =0;
+        int saleId = 0; 
+        Sale sale; 
 
-        if (sale != null) {
+        id = Integer.parseInt(Console.readLine("Ingrese el id del recibo: "));
+
+        do{
+            saleId = Integer.parseInt(Console.readLine("Ingrese el id de la venta: "));
+            sale = store.searchSale(saleId);
+            if (sale == null){
+                Console.writeLine("La venta seleccionada no existe");
+            }
+        } while (sale == null);
+
             store.registerReceipt(id, sale);
             Console.writeLine("Recibo registrado correctamente");
-        } else {
-            Console.writeLine("No se encontro la venta");
-        }
+       
     }
 
     private static void searchReceipt() {
-        int id = Integer.parseInt(Console.readLine("ingrese el id del recibo que desea buscar"));
-        Receipt receipt = store.searchReceipt(id); // guardar para poder mostrar el resultado
+        int id= 0;
+        Receipt receipt;
 
-        if (receipt != null) {
+        do{
+        id = Integer.parseInt(Console.readLine("ingrese el id del recibo que desea buscar"));
+        receipt = store.searchReceipt(id); 
+        if (receipt== null) {
+            Console.writeLine("El comprobante seleccionado no existe");
+        }
+        }while (receipt == null);
+
             Console.writeLine("id del recibo: " + receipt.getReceiptId());
             Console.writeLine("id de la venta: " + receipt.getSale().getSaleId());
             Console.writeLine("total de la venta: " + receipt.getSale().totalPurchase());
-        } else {
-            Console.writeLine("Recibo no encontrado");
-        }
     }
 
     private static void registerGender() {
-        int id = Integer.parseInt(Console.readLine("Ingrese el id del genero: "));
-        String name = Console.readLine("Ingrese el nombre del genero: ");
-        float surchargePercentage = Float.parseFloat(Console.readLine("ingrese el porcentaje adicional: "));
+        int id = 0;
+        String name = "";
+        float surchargePercentage= 0;
+        id = Integer.parseInt(Console.readLine("Ingrese el id del genero: "));
+        name = Console.readLine("Ingrese el nombre del genero: ");
+        surchargePercentage = Float.parseFloat(Console.readLine("ingrese el porcentaje adicional: "));
         store.registerGender(id, name, surchargePercentage);
     }
 
     private static void searchGender() {
-        int id = Integer.parseInt(Console.readLine("ingrese el id del genero que desea buscar"));
-        Gender gender = store.searchGender(id); // guardar para poder mostrar el resultado
+        int id = 0;
+        Gender gender;
 
-        if (gender != null) {
+        do{
+        id = Integer.parseInt(Console.readLine("ingrese el id del genero que desea buscar"));
+        gender = store.searchGender(id); 
+        if (gender == null) {
+            Console.writeLine("El genero seleccionado no existe");
+        }
+        }while (gender == null);
+
             Console.writeLine("id: " + gender.getGenderId());
             Console.writeLine("Nombre del genero: " + gender.getName());
             Console.writeLine("porcentaje adicional: " + gender.getSurchargePercentage());
-        } else {
-            Console.writeLine("Genero no encontrado");
-        }
     }
 
     private static void registerPlatform() {
-        int id = Integer.parseInt(Console.readLine("registe el id de la plataforma"));
-        String name = Console.readLine("ingrese el nombre de la plataforma");
-        float surchargePercentage = Float
-                .parseFloat(Console.readLine("ingrese el porcentaje de recargo de la plataforma"));
+        int id= 0;
+        String name = "";
+        float surchargePercentage;
+        id = Integer.parseInt(Console.readLine("registe el id de la plataforma"));
+        name = Console.readLine("ingrese el nombre de la plataforma");
+        
+        surchargePercentage = Float.parseFloat(Console.readLine("ingrese el porcentaje de recargo de la plataforma"));
         store.registerPlatform(id, name, surchargePercentage);
     }
 
     private static void searchPlatform() {
-        int id = Integer.parseInt(Console.readLine("ingrese el id de la plataforma que desea buscar"));
-        Platform platform = store.searchPlatform(id); // guardar para poder mostrar el resultado
+        int id = 0;
+        Platform platform;
 
-        if (platform != null) {
+        do{
+        id = Integer.parseInt(Console.readLine("ingrese el id de la plataforma que desea buscar"));
+        platform = store.searchPlatform(id);
+        if (platform== null) {
+            Console.writeLine("La plataforma seleccionada no existe");
+        }
+        }while (platform == null);
+
             Console.writeLine("id: " + platform.getPlatformId());
             Console.writeLine("nombre: " + platform.getName());
             Console.writeLine("Porcentaje adicional: " + platform.getSurchargePercentage());
-        } else {
-            Console.writeLine("Plataforma no encontrada");
-        }
     }
 
     private static void modifyPlatform() {
-        int id = Integer.parseInt(Console.readLine("ingrese el id de la plataforma que desea modificar"));
-        String name = Console.readLine("Ingrese el nuevo nombre");
-        float surchargePercentage = Float.parseFloat(Console.readLine("Ingrese el nuevo porcentaje"));
+        int id = 0;
+        String name="";
+        float surchargePercentage=0;
+
+        id = Integer.parseInt(Console.readLine("ingrese el id de la plataforma que desea modificar"));
+        name = Console.readLine("Ingrese el nuevo nombre");
+        surchargePercentage = Float.parseFloat(Console.readLine("Ingrese el nuevo porcentaje"));
         store.modifyPlatform(id, name, surchargePercentage);
     }
 
     private static void deletePlatform() {
-        int id = Integer.parseInt(Console.readLine("Ingrese el id de la plataforma que desea eliminar"));
+        int id=0;
+        id = Integer.parseInt(Console.readLine("Ingrese el id de la plataforma que desea eliminar"));
         store.deletePlatform(id);
     }
 
