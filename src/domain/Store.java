@@ -15,7 +15,6 @@ public class Store implements Serializable {
     private List<Receipt> receipts;
     private List<Employee> employees;
     private List<Customer> customers;
-    private List<Category> categories;
     private List<VideoGame> videoGames;
     private List<Gender> gendes;
     private List<Platform> platforms;
@@ -27,7 +26,6 @@ public class Store implements Serializable {
         employees = new LinkedList<>();
         customers = new LinkedList<>();
         receipts = new LinkedList<>();
-        categories = new LinkedList<>();
         gendes = new LinkedList<>();
         platforms = new LinkedList<>(); 
     }
@@ -324,46 +322,6 @@ public class Store implements Serializable {
             platforms.remove(platform);
         } else {
             throw new IllegalArgumentException("plataforma no encontrada");
-        }
-    }
-
-    // CRUD COPLETO CATEGORY
-
-    public Category searchCategory(int categoryIdFind) {
-        for (Category category : categories) {
-            if (category.getCategoryId() == categoryIdFind) {
-                return category;
-            }
-
-        }
-        return null;
-    }
-
-    public void registerCategory(int categoryId, Gender gender, String description) {
-        Category category = searchCategory(categoryId);
-        if (category == null) {
-            categories.add(new Category(categoryId, gender, description));
-        } else {
-            throw new IllegalArgumentException("esta categoria ya esta asignada");
-        }
-    }
-
-    public void modifyCategory(int categoryId, Gender gender, String description) {
-        Category category = searchCategory(categoryId);
-        if (category != null) {
-            category.setGender(gender);
-            category.setDescription(description);
-        } else{
-            throw new IllegalArgumentException("La categoria no existe");
-        }
-    }
-
-    public void deleteCategory(int categoryId) {
-        Category category = searchCategory(categoryId);
-        if (category != null) {
-            categories.remove(category);
-        } else {
-            throw new IllegalArgumentException("la categoria no existe");
         }
     }
 }

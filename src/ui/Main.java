@@ -4,7 +4,6 @@ import data.StoreStorage;
 import domain.*;
 import utils.Console;
 
-
 public class Main {
     private static final String FILE_NAME = "store.csv";
     private static Store store = new Store(0, "The GamingZone");
@@ -38,13 +37,9 @@ public class Main {
                 case 20 -> searchPlatform();
                 case 21 -> modifyPlatform();
                 case 22 -> deletePlatform();
-                case 23 -> registerCategory();
-                case 24 -> searchCategory();
-                case 25 -> modifyCategory();
-                case 26 -> deleteCategory();
-                case 27 -> storeSave();
-                case 28 -> storeLoad();
-                case 29 -> Console.writeLine("Exiting system...");
+                case 23 -> storeSave();
+                case 24 -> storeLoad();
+                case 25 -> Console.writeLine("Exiting system...");
                 default -> Console.writeLine("invalid option. Try again ");
             }
         } while (option != 29);
@@ -75,13 +70,9 @@ public class Main {
         Console.writeLine("20. Buscar plataforma");
         Console.writeLine("21. Modificar plataforma");
         Console.writeLine("22. Eliminar plataforma");
-        Console.writeLine("23. Registrar una categoria");
-        Console.writeLine("24, Buscar un videojuego");
-        Console.writeLine("25, Modificar categoria");
-        Console.writeLine("26, Eliminar Categoria");
-        Console.writeLine("27, Guardar");
-        Console.writeLine("28, Cargar ");
-        Console.writeLine("29, Salir");
+        Console.writeLine("23, Guardar");
+        Console.writeLine("24, Cargar ");
+        Console.writeLine("25, Salir");
         Console.writeLine("========================");
     }
 
@@ -102,7 +93,8 @@ public class Main {
         Console.writeLine("1. Videojuego fisico");
         Console.writeLine("2. Videojuego digital");
 
-        int option = Integer.parseInt(Console.readLine("Selecciona el tipo de juego"));
+        int option = 0;
+        option = Integer.parseInt(Console.readLine("Selecciona el tipo de juego"));
 
         switch (option) {
             case 1 -> registerPhysicalVideoGame();
@@ -112,26 +104,38 @@ public class Main {
     }
 
     private static void registerPhysicalVideoGame() {
-        int id = Integer.parseInt(Console.readLine("Ingrese el id: "));
-        String title = Console.readLine("Ingrese el título: ");
-        String developer = Console.readLine("Ingrese el desarrollador: ");
-        int releaseYear = Integer.parseInt(Console.readLine("Ingrese el año de lanzamiento: "));
-        float basePrice = Float.parseFloat(Console.readLine("Ingrese el precio base: "));
-
+        int id = 0;
+        id = Integer.parseInt(Console.readLine("Ingrese el id: "));
+        String title;
+        title = Console.readLine("Ingrese el título: ");
+        String developer;
+        developer = Console.readLine("Ingrese el desarrollador: ");
+        int releaseYear = 0;
+        releaseYear = Integer.parseInt(Console.readLine("Ingrese el año de lanzamiento: "));
+        float basePrice;
+        basePrice = Float.parseFloat(Console.readLine("Ingrese el precio base: "));
 
         int platformId = 0;
         Platform platform = null;
-        do{
+        do {
             platformId = Integer.parseInt(Console.readLine("Ingrese el id de la plataforma: "));
             platform = store.searchPlatform(platformId);
-            if (platform==null){
-
+            if (platform == null) {
+                Console.writeLine("La plataforma seleccionada no existe");
             }
-        }while(platform == null);
+        } while (platform == null);
 
+        int genderId = 0;
+       
+        Gender gender = null;
+        do { 
+            genderId= Integer.parseInt(Console.readLine("Ingrese el id del género: "));
+            gender=store.searchGender(genderId);
+            if (gender == null) {
+                Console.writeLine("El genero seleccionado no es valido");
+            }
+        } while (gender == null);
         
-        int genderId = Integer.parseInt(Console.readLine("Ingrese el id del género: "));
-        Gender gender = store.searchGender(genderId);
         boolean activate = Boolean.parseBoolean(Console.readLine("¿El videojuego esta activado? (true/false) "));
         int stock = Integer.parseInt(Console.readLine("Ingrese el stock: "));
         String condition = Console.readLine("Ingrese la condición (NEW o USED): ");
@@ -445,62 +449,4 @@ public class Main {
         store.deletePlatform(id);
     }
 
-    private static void registerCategory() {
-        int categoryId = Integer.parseInt(Console.readLine("ingresa el id de la categoria"));
-        int genderId = Integer.parseInt(Console.readLine("ingresa el id del genero: "));
-        Gender gender = store.searchGender(genderId);
-
-        if (gender != null) {
-            String description = Console.readLine("Ingresa la descripcion de la categoria");
-            store.registerCategory(categoryId, gender, description);
-            Console.writeLine("Categoria registrada exitosamente");
-        } else {
-            Console.writeLine("La categoria no pudo registrarse");
-        }
-    }
-
-    private static void searchCategory() {
-        int id = Integer.parseInt(Console.readLine("ingrese el id de la categoria que desea buscar"));
-        Category category = store.searchCategory(id);
-
-        if (category != null) {
-            Console.writeLine("Id de la categoria: " + category.getCategoryId());
-            Console.writeLine("Descripcion: " + category.getDescription());
-            Console.writeLine("Genero: " + category.getGender().getName());
-        } else {
-            Console.writeLine("Categoria no encontrada");
-        }
-    }
-
-    private static void modifyCategory() {
-        int categoryId = Integer.parseInt(Console.readLine("Ingrese el id de la categoría:"));
-        Category category = store.searchCategory(categoryId);
-
-        if (category != null) {
-            int genderId = Integer.parseInt(
-                    Console.readLine("Ingrese el nuevo id del género:"));
-            Gender gender = store.searchGender(genderId);
-            if (gender != null) {
-                String description = Console.readLine("Ingrese la nueva descripción de la categoría:");
-                store.modifyCategory(categoryId, gender, description);
-                Console.writeLine("Categoría modificada correctamente");
-            } else {
-                Console.writeLine("Género no encontrado");
-            }
-        } else {
-            Console.writeLine("Categoría no encontrada");
-        }
-    }
-
-    private static void deleteCategory() {
-        int categoryId = Integer.parseInt(Console.readLine("Ingrese el id de la categoria que desea eliminar "));
-        Category category = store.searchCategory(categoryId);
-
-        if (category != null) {
-            store.deleteCategory(categoryId);
-            Console.writeLine("Categoria eliminada correctamente");
-        } else {
-            Console.writeLine("Categoria no encontrada");
-        }
-    }
 }
