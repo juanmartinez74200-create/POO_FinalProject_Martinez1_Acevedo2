@@ -317,16 +317,24 @@ public class Main {
     }
 
     private static void registerCustomer() {
-        int id = Integer.parseInt(Console.readLine("Ingrese el id del cliente: "));
-        String name = Console.readLine("Ingrese el nombre del cliente: ");
-        String phoneNumber = Console.readLine("ingrese el numero de telefono de el cliente");
-        String email = Console.readLine("Ingrese el email de el cliente");
+        int id = 0;
+        String name;
+        String phoneNumber;
+        String email;
+
+
+        id = Integer.parseInt(Console.readLine("Ingrese el id del cliente: "));
+        name = Console.readLine("Ingrese el nombre del cliente: ");
+        phoneNumber = Console.readLine("ingrese el numero de telefono de el cliente");
+        email = Console.readLine("Ingrese el email de el cliente");
         store.registerCustomer(id, name, phoneNumber, email);
+        
     }
 
     private static void searchCustomer() {
 
-        int id = Integer.parseInt(Console.readLine("ingrese el id del cliente que desea buscar"));
+        int id = 0;
+        id = Integer.parseInt(Console.readLine("ingrese el id del cliente que desea buscar"));
         Customer customer = store.searchCustomer(id);
 
         if (customer != null) {
@@ -340,10 +348,15 @@ public class Main {
     }
 
     private static void modifyCustomer() {
-        int id = Integer.parseInt(Console.readLine("ingrese el id del cliente que desea modificar"));
-        String name = Console.readLine("Ingrese el nuevo nombre");
-        String phoneNumber = Console.readLine("ingrese el nuevo numero de telefono");
-        String email = Console.readLine("ingrese el numero email");
+        int id = 0;
+        String name;
+        String phoneNumber;
+        String email;
+
+        id = Integer.parseInt(Console.readLine("ingrese el id del cliente que desea modificar"));
+        name = Console.readLine("Ingrese el nuevo nombre");
+        phoneNumber = Console.readLine("ingrese el nuevo numero de telefono");
+        email = Console.readLine("ingrese el email");
 
         store.modifyCustomer(id, name, phoneNumber, email);
     }
