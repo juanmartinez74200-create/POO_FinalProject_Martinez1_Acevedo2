@@ -322,9 +322,9 @@ public class Main {
 
     private static void registerCustomer() {
         int id = 0;
-        String name;
-        String phoneNumber;
-        String email;
+        String name = "";
+        String phoneNumber="";
+        String email="";
 
 
         id = Integer.parseInt(Console.readLine("Ingrese el id del cliente: "));
@@ -338,18 +338,21 @@ public class Main {
     private static void searchCustomer() {
 
         int id = 0;
-        id = Integer.parseInt(Console.readLine("ingrese el id del cliente que desea buscar"));
-        Customer customer = store.searchCustomer(id);
+        Customer customer;
 
-        if (customer != null) {
+        do{
+        id = Integer.parseInt(Console.readLine("ingrese el id del cliente que desea buscar"));
+        customer = store.searchCustomer(id);
+        if (customer==null) {
+            Console.writeLine("El cliente seleccionado no existe");
+        }
+        }while(customer == null);
+
             Console.writeLine("id: " + customer.getId());
             Console.writeLine("nombre: " + customer.getName());
             Console.writeLine("numero de telefono: " + customer.getPhoneNumber());
             Console.writeLine("email: " + customer.getEmail());
-        } else {
-            Console.writeLine("cliente no encontrado");
         }
-    }
 
     private static void modifyCustomer() {
         int id = 0;
