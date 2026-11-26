@@ -3,7 +3,7 @@ package ui;
 import data.StoreStorage;
 import domain.*;
 import utils.Console;
-import data.*;
+
 
 public class Main {
     private static final String FILE_NAME = "store.csv";
@@ -117,8 +117,19 @@ public class Main {
         String developer = Console.readLine("Ingrese el desarrollador: ");
         int releaseYear = Integer.parseInt(Console.readLine("Ingrese el año de lanzamiento: "));
         float basePrice = Float.parseFloat(Console.readLine("Ingrese el precio base: "));
-        int platformId = Integer.parseInt(Console.readLine("Ingrese el id de la plataforma: "));
-        Platform platform = store.searchPlatform(platformId);
+
+
+        int platformId = 0;
+        Platform platform = null;
+        do{
+            platformId = Integer.parseInt(Console.readLine("Ingrese el id de la plataforma: "));
+            platform = store.searchPlatform(platformId);
+            if (platform==null){
+
+            }
+        }while(platform == null);
+
+        
         int genderId = Integer.parseInt(Console.readLine("Ingrese el id del género: "));
         Gender gender = store.searchGender(genderId);
         boolean activate = Boolean.parseBoolean(Console.readLine("¿El videojuego esta activado? (true/false) "));
@@ -169,8 +180,8 @@ public class Main {
                 Console.writeLine("El peso del Videojuego :" + digital.getDownloadSize());
                 Console.writeLine("La cantidad de licencias disponibles :" + digital.getAvailableLicenses());
             }
-            Console.writeLine("Genero :" + gender.getName());
-            Console.writeLine("Plataforma :" + platform.getName());
+            Console.writeLine("Genero : " + gender.getName());
+            Console.writeLine("Plataforma : " + platform.getName());
         } else {
             Console.writeLine("Videojuego no encontrado");
         }
