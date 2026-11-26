@@ -116,14 +116,14 @@ public class Main {
         boolean activate = false;
         int stock = 0;
         String condition = "";
-        id = Integer.parseInt(Console.readLine("Ingrese el id: "));
-        title = Console.readLine("Ingrese el título: ");
-        developer = Console.readLine("Ingrese el desarrollador: ");
-        releaseYear = Integer.parseInt(Console.readLine("Ingrese el año de lanzamiento: "));
-        basePrice = Float.parseFloat(Console.readLine("Ingrese el precio base: "));
+        id = Integer.parseInt(Console.readLine("Ingrese el id : "));
+        title = Console.readLine("Ingrese el título : ");
+        developer = Console.readLine("Ingrese el desarrollador : ");
+        releaseYear = Integer.parseInt(Console.readLine("Ingrese el año de lanzamiento : "));
+        basePrice = Float.parseFloat(Console.readLine("Ingrese el precio base : "));
 
         do {
-            platformId = Integer.parseInt(Console.readLine("Ingrese el id de la plataforma: "));
+            platformId = Integer.parseInt(Console.readLine("Ingrese el id de la plataforma : "));
             platform = store.searchPlatform(platformId);
             if (platform == null) {
                 Console.writeLine("La plataforma seleccionada no existe");
@@ -131,7 +131,7 @@ public class Main {
         } while (platform == null);
 
         do {
-            genderId = Integer.parseInt(Console.readLine("Ingrese el id del género: "));
+            genderId = Integer.parseInt(Console.readLine("Ingrese el id del género : "));
             gender = store.searchGender(genderId);
             if (gender == null) {
                 Console.writeLine("El genero seleccionado no es valido");
@@ -139,8 +139,8 @@ public class Main {
         } while (gender == null);
 
         activate = Boolean.parseBoolean(Console.readLine("¿El videojuego esta activado? (true/false) "));
-        stock = Integer.parseInt(Console.readLine("Ingrese el stock: "));
-        condition = Console.readLine("Ingrese la condición (NEW o USED): ");
+        stock = Integer.parseInt(Console.readLine("Ingrese el stock : "));
+        condition = Console.readLine("Ingrese la condición (NEW o USED) : ");
         store.registerPhysicalVideogame(id, title, developer, releaseYear, basePrice, platform, gender,
                 activate, stock, condition);
     }
@@ -159,11 +159,11 @@ public class Main {
         boolean activate = false;
         float downloadSize = 0;
 
-        id = Integer.parseInt(Console.readLine("Ingrese el id: "));
-        title = Console.readLine("Ingrese el título: ");
-        developer = Console.readLine("Ingrese el desarrollador: ");
-        releaseYear = Integer.parseInt(Console.readLine("Ingrese el año de lanzamiento: "));
-        basePrice = Float.parseFloat(Console.readLine("Ingrese el precio base: "));
+        id = Integer.parseInt(Console.readLine("Ingrese el id : "));
+        title = Console.readLine("Ingrese el título : ");
+        developer = Console.readLine("Ingrese el desarrollador : ");
+        releaseYear = Integer.parseInt(Console.readLine("Ingrese el año de lanzamiento : "));
+        basePrice = Float.parseFloat(Console.readLine("Ingrese el precio base : "));
 
         do {
             platformId = Integer.parseInt(Console.readLine("Ingrese el id de la plataforma: "));
@@ -180,9 +180,9 @@ public class Main {
             }
         } while (gender == null);
 
-        activate = Boolean.parseBoolean(Console.readLine("¿El videojuego está activo? (true/false): "));
-        downloadSize = Float.parseFloat(Console.readLine("Ingrese el tamaño de descarga: " + "GB"));
-        availableLicenses = Integer.parseInt(Console.readLine("Ingrese la cantidad de licencias disponibles: "));
+        activate = Boolean.parseBoolean(Console.readLine("¿El videojuego está activo? (true/false) : "));
+        downloadSize = Float.parseFloat(Console.readLine("Ingrese el tamaño de descarga : " + "GB"));
+        availableLicenses = Integer.parseInt(Console.readLine("Ingrese la cantidad de licencias disponibles : "));
         store.registerDigitalVideoGame(id, title, developer, releaseYear, basePrice,
                 platform, gender, activate, downloadSize, availableLicenses);
     }
@@ -194,12 +194,12 @@ public class Main {
         Gender gender = store.searchGender(id);
         Platform platform = store.searchPlatform(id);
         if (videoGame != null) {
-            Console.writeLine("id: " + videoGame.getId());
-            Console.writeLine("Título: " + videoGame.getTitle());
-            Console.writeLine("Desarrollador: " + videoGame.getDeveloper());
-            Console.writeLine("Año de lanzamiento: " + videoGame.getReleaseYear());
-            Console.writeLine("Precio base: " + videoGame.getBasePrice());
-            Console.writeLine("Precio de venta: " + videoGame.calculateSellingPrice());
+            Console.writeLine("id : " + videoGame.getId());
+            Console.writeLine("Título : " + videoGame.getTitle());
+            Console.writeLine("Desarrollador : " + videoGame.getDeveloper());
+            Console.writeLine("Año de lanzamiento : " + videoGame.getReleaseYear());
+            Console.writeLine("Precio base : " + videoGame.getBasePrice());
+            Console.writeLine("Precio de venta : " + videoGame.calculateSellingPrice());
             if (videoGame instanceof PhysicalGame physical) {
                 Console.writeLine("La condicion es :" + physical.getCondition());
                 Console.writeLine("La cantidad de stock es :" + physical.getStock());
@@ -216,7 +216,7 @@ public class Main {
 
     private static void modifyVideoGame() {
         int id = 0;
-        id = Integer.parseInt(Console.readLine("ingrese el id del videojuego que deea modificar: "));
+        id = Integer.parseInt(Console.readLine("ingrese el id del videojuego que desea modificar : "));
         VideoGame videoGame = store.searchVideoGame(id);
         if (videoGame != null) {
             if (videoGame instanceof PhysicalGame) {
@@ -227,7 +227,6 @@ public class Main {
         } else {
             Console.writeLine("no hay videojuego con ese id");
         }
-
     }
 
     private static void modifyPhysicalVideoGame(int id) {
@@ -243,12 +242,12 @@ public class Main {
         int stock = 0;
         String condition = "";
 
-        title = Console.readLine("Ingrese el nuevo título: ");
-        developer = Console.readLine("Ingrese el nuevo desarrollador: ");
-        releaseYear = Integer.parseInt(Console.readLine("Ingrese el nuevo año de lanzamiento: "));
-        basePrice = Float.parseFloat(Console.readLine("Ingrese el nuevo precio base: "));
+        title = Console.readLine("Ingrese el nuevo título : ");
+        developer = Console.readLine("Ingrese el nuevo desarrollador : ");
+        releaseYear = Integer.parseInt(Console.readLine("Ingrese el nuevo año de lanzamiento : "));
+        basePrice = Float.parseFloat(Console.readLine("Ingrese el nuevo precio base : "));
         do {
-            platformId = Integer.parseInt(Console.readLine("Ingrese el ID de la nueva plataforma: "));
+            platformId = Integer.parseInt(Console.readLine("Ingrese el ID de la nueva plataforma : "));
             platform = store.searchPlatform(platformId);
             if (platform == null) {
                 Console.writeLine("La plataforma es invalida/no existe");
@@ -264,7 +263,7 @@ public class Main {
         } while (gender == null);
 
         activate = Boolean.parseBoolean(Console.readLine("¿El videojuego está activo? (true/false): "));
-        stock = Integer.parseInt(Console.readLine("Ingrese el nuevo stock: "));
+        stock = Integer.parseInt(Console.readLine("Ingrese el nuevo stock : "));
         condition = Console.readLine("Ingrese la nueva condición (NEW o USED): ");
         store.modifyPhysicalVideoGame(
                 id, title, developer, releaseYear, basePrice,
@@ -284,29 +283,29 @@ public class Main {
         float downloadSize = 0;
         int availableLicenses = 0;
 
-        title = Console.readLine("Ingrese el nuevo título: ");
-        developer = Console.readLine("Ingrese el nuevo desarrollador: ");
-        releaseYear = Integer.parseInt(Console.readLine("Ingrese el nuevo año de lanzamiento: "));
-        basePrice = Float.parseFloat(Console.readLine("Ingrese el nuevo precio base: "));
+        title = Console.readLine("Ingrese el nuevo título : ");
+        developer = Console.readLine("Ingrese el nuevo desarrollador : ");
+        releaseYear = Integer.parseInt(Console.readLine("Ingrese el nuevo año de lanzamiento : "));
+        basePrice = Float.parseFloat(Console.readLine("Ingrese el nuevo precio base : "));
 
         do {
-            platformId = Integer.parseInt(Console.readLine("Ingrese el id de la plataforma: "));
+            platformId = Integer.parseInt(Console.readLine("Ingrese el id de la plataforma : "));
             platform = store.searchPlatform(platformId);
             if (platform == null) {
                 Console.writeLine("La plataforma seleccionada no existe");
             }
         } while (platform == null);
         do {
-            genderId = Integer.parseInt(Console.readLine("Ingrese el id del género: "));
+            genderId = Integer.parseInt(Console.readLine("Ingrese el id del género : "));
             gender = store.searchGender(genderId);
             if (gender == null) {
                 Console.writeLine("El genero seleccionado no es valido");
             }
         } while (gender == null);
 
-        activate = Boolean.parseBoolean(Console.readLine("¿El videojuego está activo? (true/false): "));
-        downloadSize = Float.parseFloat(Console.readLine("Ingrese el nuevo tamaño de descarga: "));
-        availableLicenses = Integer.parseInt(Console.readLine("Ingrese la nueva cantidad de licencias: "));
+        activate = Boolean.parseBoolean(Console.readLine("¿El videojuego está activo? (true/false) : "));
+        downloadSize = Float.parseFloat(Console.readLine("Ingrese el nuevo tamaño de descarga : "));
+        availableLicenses = Integer.parseInt(Console.readLine("Ingrese la nueva cantidad de licencias : "));
         store.modifyDigitalVideoGame(
                 id, title, developer, releaseYear, basePrice,
                 platform, gender, activate, downloadSize, availableLicenses);
@@ -322,8 +321,8 @@ public class Main {
         int id = 0;
         String name = "";
 
-        id = Integer.parseInt(Console.readLine("Ingrese el id del empleado: "));
-        name = Console.readLine("Ingres el numero del empleado: ");
+        id = Integer.parseInt(Console.readLine("Ingrese el id del empleado : "));
+        name = Console.readLine("Ingres el numero del empleado : ");
         store.registerEmployee(id, name);
     }
 
@@ -364,8 +363,8 @@ public class Main {
         Customer customer = null;
         VideoGame videoGame = null;
         int videoGameId = 0;
-        saleId = Integer.parseInt(Console.readLine("Ingrese el id de la venta: "));
-        amount = Integer.parseInt(Console.readLine("Ingrese la cantidad: "));
+        saleId = Integer.parseInt(Console.readLine("Ingrese el id de la venta : "));
+        amount = Integer.parseInt(Console.readLine("Ingrese la cantidad : "));
 
         do {
             employeeId = Integer.parseInt(Console.readLine("ingrese el id del empleado que realiza la venta"));
@@ -424,8 +423,8 @@ public class Main {
         String phoneNumber = "";
         String email = "";
 
-        id = Integer.parseInt(Console.readLine("Ingrese el id del cliente: "));
-        name = Console.readLine("Ingrese el nombre del cliente: ");
+        id = Integer.parseInt(Console.readLine("Ingrese el id del cliente : "));
+        name = Console.readLine("Ingrese el nombre del cliente : ");
         phoneNumber = Console.readLine("ingrese el numero de telefono de el cliente");
         email = Console.readLine("Ingrese el email de el cliente");
         store.registerCustomer(id, name, phoneNumber, email);
@@ -476,10 +475,10 @@ public class Main {
         int saleId = 0;
         Sale sale = null;
 
-        id = Integer.parseInt(Console.readLine("Ingrese el id del recibo: "));
+        id = Integer.parseInt(Console.readLine("Ingrese el id del recibo : "));
 
         do {
-            saleId = Integer.parseInt(Console.readLine("Ingrese el id de la venta: "));
+            saleId = Integer.parseInt(Console.readLine("Ingrese el id de la venta : "));
             sale = store.searchSale(saleId);
             if (sale == null) {
                 Console.writeLine("La venta seleccionada no existe");
@@ -514,7 +513,7 @@ public class Main {
         float surchargePercentage = 0;
         id = Integer.parseInt(Console.readLine("Ingrese el id del genero: "));
         name = Console.readLine("Ingrese el nombre del genero: ");
-        surchargePercentage = Float.parseFloat(Console.readLine("ingrese el porcentaje adicional: "));
+        surchargePercentage = Float.parseFloat(Console.readLine("ingrese el porcentaje adiciona : "));
         store.registerGender(id, name, surchargePercentage);
     }
 
