@@ -29,6 +29,28 @@ public class Store implements Serializable {
         gendes = new LinkedList<>();
         platforms = new LinkedList<>(); 
     }
+    //metodos que muestran las listas de las clases
+    public List<VideoGame> listVideoGames(){
+        return videoGames;
+    }
+    public List<Receipt> listReceipts(){
+        return receipts;
+    }
+    public List<Employee> listEmployees(){
+        return employees;
+    }    
+    public List<Gender> listGenders(){
+        return gendes;
+    }
+    public List<Platform> listPlatforms(){
+        return platforms;
+    }
+    public List<Sale> listSales(){
+        return sales;
+    }
+    public List<Customer> listCustomers(){
+        return customers;
+    }
 
     // contructor de la clase con parametros
     public Store(int id, String storeName) {
