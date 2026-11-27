@@ -12,15 +12,25 @@ El proyecto busca aplicar los principales conceptos de la programación orientad
 Ademas el sistema permite guardar y recuperar la informacion de la tienda mediante la serializacion de objetos.
 
 2. Funcionalidades
+   
    VIDEOJUEGOS
+   
 • Registrar videojuegos fisicos y digitales
+
 • Buscar videojuegos por identificador
+
 • Modificar videojuegos registrados
+
 • Eliminar videojuegos
+
 • Consultar información y precio de venta
+
 • Gestionar el stock de los videojuegos
+
 • Gestionar las licencias disponibles de los videojuegos digitales
+
 • Diferenciar los videojuegos fisicos nuevos y usados
+
    EMPLEADOS
 • Registrar empleados
 • Buscar empleados
