@@ -16,7 +16,7 @@ public class Store implements Serializable {
     private List<Employee> employees;
     private List<Customer> customers;
     private List<VideoGame> videoGames;
-    private List<Gender> gendes;
+    private List<Gender> genders;
     private List<Platform> platforms;
 
     // constructor vacio
@@ -26,7 +26,7 @@ public class Store implements Serializable {
         employees = new LinkedList<>();
         customers = new LinkedList<>();
         receipts = new LinkedList<>();
-        gendes = new LinkedList<>();
+        genders = new LinkedList<>();
         platforms = new LinkedList<>(); 
     }
     //metodos que muestran las listas de las clases
@@ -40,7 +40,7 @@ public class Store implements Serializable {
         return employees;
     }    
     public List<Gender> listGenders(){
-        return gendes;
+        return genders;
     }
     public List<Platform> listPlatforms(){
         return platforms;
@@ -75,14 +75,6 @@ public class Store implements Serializable {
 
     public static void setStoreName(String storeName) {
         Store.storeName = storeName;
-    }
-
-    public List<Platform> getPlatforms(){
-        return platforms;
-    }
-
-    public List<Gender> getGendes(){
-        return gendes;
     }
 
     // CRUDs completos y unos parciales
@@ -300,14 +292,14 @@ public class Store implements Serializable {
     public void registerGender(int genderId, String name, float surchargePercentage) {
         Gender gender = searchGender(genderId);
         if (gender == null) {
-            gendes.add(new Gender(genderId, name, surchargePercentage));
+            genders.add(new Gender(genderId, name, surchargePercentage));
         } else {
             throw new IllegalArgumentException("este genero esta agregado");
         }
     }
 
     public Gender searchGender(int genderIdFind) {
-        for (Gender gender : gendes) {
+        for (Gender gender : genders) {
             if (gender.getGenderId() == genderIdFind) {
                 return gender;
             }
