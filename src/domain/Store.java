@@ -55,6 +55,14 @@ public class Store implements Serializable {
         Store.storeName = storeName;
     }
 
+    public List<Platform> getPlatforms(){
+        return platforms;
+    }
+
+    public List<Gender> getGendes(){
+        return gendes;
+    }
+
     // CRUDs completos y unos parciales
 
     // CRUD completo class VideoGame y mostrar lista
