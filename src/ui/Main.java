@@ -70,9 +70,9 @@ public class Main {
         Console.writeLine("20. Buscar plataforma");
         Console.writeLine("21. Modificar plataforma");
         Console.writeLine("22. Eliminar plataforma");
-        Console.writeLine("23, Guardar");
-        Console.writeLine("24, Cargar ");
-        Console.writeLine("25, Salir");
+        Console.writeLine("23. Guardar");
+        Console.writeLine("24. Cargar ");
+        Console.writeLine("25. Salir");
         Console.writeLine("========================");
     }
 
@@ -189,17 +189,26 @@ public class Main {
 
     private static void searchVideoGame() {
         int id = 0;
+        VideoGame videoGame;
+
+        do{
         id = Integer.parseInt(Console.readLine("Ingrese el id del videojuego que desea buscar: "));
-        VideoGame videoGame = store.searchVideoGame(id);
-        Gender gender = store.searchGender(id);
-        Platform platform = store.searchPlatform(id);
-        if (videoGame != null) {
+        videoGame = store.searchVideoGame(id);
+    
+        if (videoGame == null) {
+            Console.writeLine("El videojuego seleccionado no existe");
+        }
+        }while(videoGame==null);
+
             Console.writeLine("id : " + videoGame.getId());
             Console.writeLine("Título : " + videoGame.getTitle());
             Console.writeLine("Desarrollador : " + videoGame.getDeveloper());
             Console.writeLine("Año de lanzamiento : " + videoGame.getReleaseYear());
             Console.writeLine("Precio base : " + videoGame.getBasePrice());
             Console.writeLine("Precio de venta : " + videoGame.calculateSellingPrice());
+            Console.writeLine("Genero: "+ videoGame.getGender().getName());
+            Console.writeLine("Plataforma: "+videoGame.getPlatform().getName());
+
             if (videoGame instanceof PhysicalGame physical) {
                 Console.writeLine("La condicion es :" + physical.getCondition());
                 Console.writeLine("La cantidad de stock es :" + physical.getStock());
@@ -207,11 +216,6 @@ public class Main {
                 Console.writeLine("El peso del Videojuego :" + digital.getDownloadSize());
                 Console.writeLine("La cantidad de licencias disponibles :" + digital.getAvailableLicenses());
             }
-            Console.writeLine("Genero : " + gender.getName());
-            Console.writeLine("Plataforma : " + platform.getName());
-        } else {
-            Console.writeLine("Videojuego no encontrado");
-        }
     }
 
     private static void modifyVideoGame() {
@@ -322,7 +326,7 @@ public class Main {
         String name = "";
 
         id = Integer.parseInt(Console.readLine("Ingrese el id del empleado : "));
-        name = Console.readLine("Ingres el numero del empleado : ");
+        name = Console.readLine("Ingrese el nombre del empleado : ");
         store.registerEmployee(id, name);
     }
 
@@ -374,8 +378,7 @@ public class Main {
             }
         } while (employee == null);
         do {
-            customerId = Integer.parseInt("Ingrese el id del cliente al que se le realiza la venta");
-            customer = store.searchCustomer(customerId);
+            customerId = Integer.parseInt(Console.readLine("Ingrese el id del cliente al que se le realiza la venta"));          customer = store.searchCustomer(customerId);
             if (customer == null) {
                 Console.writeLine("El cliente no esta registrado");
             }
