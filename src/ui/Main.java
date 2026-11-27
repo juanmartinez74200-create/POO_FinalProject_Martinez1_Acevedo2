@@ -292,6 +292,7 @@ public class Main {
                 platform, gender, activate, stock, condition);
     }
 
+
     private static void modifyDigitalVideoGame(int id) {
         float basePrice = 0;
         String title = "";
@@ -331,8 +332,7 @@ public class Main {
         activate = Boolean.parseBoolean(Console.readLine("¿El videojuego está activo? (true/false) : "));
         downloadSize = Float.parseFloat(Console.readLine("Ingrese el nuevo tamaño de descarga : "));
         availableLicenses = Integer.parseInt(Console.readLine("Ingrese la nueva cantidad de licencias : "));
-        store.modifyDigitalVideoGame(
-                id, title, developer, releaseYear, basePrice,
+        store.modifyDigitalVideoGame(id, title, developer, releaseYear, basePrice,
                 platform, gender, activate, downloadSize, availableLicenses);
     }
 
@@ -431,8 +431,10 @@ public class Main {
             }
         } while (videoGame == null);
 
-            Console.writeLine("Venta registrada correctamente");
+            store.registerSale(saleId, amount, employee, customer, videoGame);
+            Console.writeLine("Venta registrada correctamente");   
     }
+
 
     private static void searchSale() {
         int id = 0;
@@ -462,6 +464,7 @@ public class Main {
         String phoneNumber = "";
         String email = "";
 
+        showCustomers();
         id = Integer.parseInt(Console.readLine("Ingrese el id del cliente : "));
         name = Console.readLine("Ingrese el nombre del cliente : ");
         phoneNumber = Console.readLine("ingrese el numero de telefono de el cliente");
@@ -495,7 +498,8 @@ public class Main {
         String name = "";
         String phoneNumber = "";
         String email = "";
-
+        
+        showCustomers();
         id = Integer.parseInt(Console.readLine("ingrese el id del cliente que desea modificar"));
         name = Console.readLine("Ingrese el nuevo nombre");
         phoneNumber = Console.readLine("ingrese el nuevo numero de telefono");
@@ -506,6 +510,8 @@ public class Main {
 
     private static void deleteCustomer() {
         int id = 0;
+
+        showCustomers();
         id = Integer.parseInt(Console.readLine("Ingrese el id de el cliente que desea eliminar"));
         store.deleteCustomer(id);
     }
@@ -515,8 +521,10 @@ public class Main {
         int saleId = 0;
         Sale sale = null;
 
+        showReceipts();
         id = Integer.parseInt(Console.readLine("Ingrese el id del recibo : "));
 
+        showSales();
         do {
             saleId = Integer.parseInt(Console.readLine("Ingrese el id de la venta : "));
             sale = store.searchSale(saleId);
@@ -552,6 +560,8 @@ public class Main {
         int id = 0;
         String name = "";
         float surchargePercentage = 0;
+
+        showGenders();
         id = Integer.parseInt(Console.readLine("Ingrese el id del genero: "));
         name = Console.readLine("Ingrese el nombre del genero: ");
         surchargePercentage = Float.parseFloat(Console.readLine("ingrese el porcentaje adiciona : "));
@@ -581,6 +591,7 @@ public class Main {
         String name = "";
         float surchargePercentage = 0;
 
+        showPlatforms();
         id = Integer.parseInt(Console.readLine("registe el id de la plataforma"));
         name = Console.readLine("ingrese el nombre de la plataforma");
         surchargePercentage = Float.parseFloat(Console.readLine("ingrese el porcentaje de recargo de la plataforma"));
@@ -609,7 +620,8 @@ public class Main {
         int id = 0;
         String name = "";
         float surchargePercentage = 0;
-
+        
+        showPlatforms();
         id = Integer.parseInt(Console.readLine("ingrese el id de la plataforma que desea modificar"));
         name = Console.readLine("Ingrese el nuevo nombre");
         surchargePercentage = Float.parseFloat(Console.readLine("Ingrese el nuevo porcentaje"));
@@ -618,6 +630,8 @@ public class Main {
 
     private static void deletePlatform() {
         int id = 0;
+
+        showPlatforms();
         id = Integer.parseInt(Console.readLine("Ingrese el id de la plataforma que desea eliminar"));
         store.deletePlatform(id);
     }
