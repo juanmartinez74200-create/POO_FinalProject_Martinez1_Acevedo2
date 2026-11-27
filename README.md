@@ -1,18 +1,118 @@
+The GamingZone🎮
 2# POO_FinalProject_Martinez1_Acevedo2
 
 Integrantes del grupo:
 Juan Andrés Martínez Gutierrez(74200)
 Yurany Acevedo Duran (74012)
 
-INFORMACION ACERCA DE EL PROYECTO
+1. Informacion acerca del proyecto
 
-En la información a continuación se dará una explicación  acerca de el proyecto de programación orientada a objetos en donde nuestro objetivos es llevar a cabo un sistema de gestión de una tienda de videojuegos (VideoGame Store),la cual tiene ciertos requisitos mínimos que incluyen a el paradigma orientado a objetos con conceptos como la herencia, él polimorfismo, las relaciones entre otras y un sistema de carpetas encargado de distribuir responsabilidades.
+The GamingZone es un sistema de gestión para una tienda de videojuegos, desarrollado en java, que permite administrar videojuegos fisicos y digitales, empleados, clientes,ventas, recibos, generos y plataformas.
+El proyecto busca aplicar los principales conceptos de la programación orientada a objetos, mediante una estructura organizada en paquetes, clases, relaciones entre objetos, herencia, abstracción, encapsulamiento y polimorfismo.
+Ademas el sistema permite guardar y recuperar la informacion de la tienda mediante la serializacion de objetos.
 
-En este este proyecto se ha tenido como requisito tener por lo menos nueve clases de las cuales se conocerán a continuación :
+2. Funcionalidades
+   VIDEOJUEGOS
+• Registrar videojuegos fisicos y digitales
+• Buscar videojuegos por identificador
+• Modificar videojuegos registrados
+• Eliminar videojuegos
+• Consultar información y precio de venta
+• Gestionar el stock de los videojuegos
+• Gestionar las licencias disponibles de los videojuegos digitales
+• Diferenciar los videojuegos fisicos nuevos y usados
+   EMPLEADOS
+• Registrar empleados
+• Buscar empleados
+• Modificar empleados
+• Eliminar empleados
+   CLIENTES
+• Registrar clientes
+• Buscar clientes
+• Modificar clientes
+• Eliminar clientes
+   VENTAS
+• Registrar ventas asociadas a un empleado, un cliente y un videojuego
+• Buscar ventas por identificador
+• Calcular el total de una venta segun la cantidad y el precio de venta del videojuego
+   RECIBOS
+• Registrar recibos asociados a una venta
+• Buscar recibos por identificador
+• Consultar el total de la venta asociada
+   GENEROS
+• Registrar generos
+• Buscar generos
+• Definir porcentajes de recargo asociado a los generos.
+   PLATAFORMAS
+• Registrar plataformas
+• Buscar platafromas
+• Modificar plataformas
+• Definir porcentaje de recargo asociado a las plataformas
 
-Store : esta es la clase que dirigirá específicamente la tienda, esta clase es la encargada de listar las demás clases, aquí se implementó un sistema de CRUDs para las clases necesaria completo y para otras parciales en donde solo se buscara y añadirá, esta clase básicamente la encargada de todo el sistema de gestión.
+Además de estas funciones tambien se va a permitir guardar la información de la tienda en un archivo, cargar la información previamente almacenada y utilizar la serialización de objetos para conservar los datos. 
 
-VideoGame: la clase VideoGame es la clase encargada de crear los videojuegos por plataforma, además de eso es una clase de gran importancia ya que a partir de esta se estarán inclinando las demás clase porque la tienda gira al rededor de los videojuegos, esta clase trabaja con 4 plataformas las cuales están trabajadas por medio un (enum) la cuales son las siguiente :pc, Nintendo, PlayStation, Xbox todavía no es definitivo pero tal vez en un futuro cercano o lejano se tenga planeado elegir o poner juegos de consolas especificas como (PS5, Xbox one, Nintendo swich) como lo es realmente en una tienda de videojuegos real, por ende cada una de estas consolas especificas tendrán precios muy variables y no serán una generalidad como se tiene actualmente en el sistema.
+3.Organización del proyecto 
+El proyecto será organizado en los siguientes paquetes: 
+• domain --> Contiene las clases dominantes y la lógica de gestión de la tienda, alli estaran las siguientes clases:
+    Person, Employee, Customer, VideoGame, PhysicalGame, DigitalGame, Platform, Gender, Sale, Receipt, Store
+•ui --> Contiene la clase que se encarga de la interacción con el usuario mediante el menú de sonsola, alli estara la siguiente clase:
+    Main
+•data --> Contiene la clase encargada del almacenamiento y recuperación de datos de la tienda, alli estara la siguiente clase:
+    StoreStorage 
+•utils --> Contiene herramientas auxiliares para la interacción por consola, alli estara la siguiente clase: 
+    Console
+
+4. Descripcion de las clases principales
+
+Person --> Clase que contiene los atributos comunes de identificación y nombre
+Employee --> Representa a los empleados de la tienda y hereda los atributos de la clase Person
+Customer --> Representa a los clientes, hereda tambien de la clase Person pero tiene atributos adicionales (Telefono y correo electronico)
+VideoGame --> Clase abstracta que define los atributos y comportamientos comunes de los videojuegos
+PhysicalVideoGame --> Representa los videojuegos físicos, hereda de la clase VideoGame con atributos adicionales (stock y condicion (NEW o USED) es decir, si es nuevo o usado)
+DigitalVideoGame --> Representa los videojuegos digitales, hereda de la clase videogame con atributos adicionales (tamaño de descarga y licencias disponicles)
+Platform --> Representa las plataformas de videojuegos y su porcentaje de recargo
+Gender --> Representa los generos de videojuegos y su porcentaje de recargo
+Sale --> Representa una vneta asociada a un empleado, un cliente, un videojuego y una cantidad
+Receipt --> Representa un recibo asociado a una venta 
+Store --> Representa la gestión de la tienda,  es la encargada de listar las demás clases. Se implementará un sistema de CRUDs completos y parciales. 
+Main --> Contiene el menú principal y permite al usuario interactuar con el sistema
+StoreStorage --> Se encarga de guardar y cargar los datos de la tienda mediante serialización
+Console --> Facilita la lectura de datos y la representación de mensajes por consola 
+
+5. Conceptos de programación orientada a objetos aplicados
+
+ABSTRACCIÓN
+Se aplica mediante la clase abstracta VideoGame, que define las características y comportamientos comunes de los videojuegos físicos y digitales, sin representar directamente una instancia concreta.
+
+ENCAPSULAMIENTO
+Los atributos de las clases se manejan mediante modificadores de acceso y métodos getters y setters, permitiendo controlar el acceso y la modificación de la información.
+
+HERENCIA
+Se utiliza para reutilizar atributos y comportamientos entre clases.
+•Employee hereda de Person.
+•Customer hereda de Person.
+•PhysicalGame hereda de VideoGame.
+•DigitalGame hereda de VideoGame.
+
+Polimorfismo
+Se aplica mediante el método calculateSellingPrice(), definido de manera abstracta en VideoGame y sobrescrito en PhysicalGame y DigitalGame, permitiendo calcular el precio de venta según el tipo de videojuego.
+
+Relaciones entre clases
+El sistema utiliza relaciones entre objetos para asociar videojuegos con plataformas y géneros, ventas con clientes, empleados y videojuegos, y recibos con ventas.
+
+Colecciones
+La clase Store utiliza listas de tipo List implementadas mediante LinkedList para almacenar y administrar los registros de las diferentes entidades.
+
+Serialización
+Se implementa mediante ObjectOutputStream y ObjectInputStream, permitiendo almacenar y recuperar el objeto Store y su información asociada.
+
+
+   
+
+
+
+
+
 
 PhysicalGame : Esta clase es una clase que hereda de la clase Videogame en donde lo que se quiere con esta clase es catalogar tal y como se hace en la vida real que existen videojuegos físicos en donde tendran cierto valor dependendiento también del estado en el cual se encuentre el videojuego para esto se ha implementado un sistema de dos estados uno donde el juego esta nuevo y otro donde esta usado, pará el videojuego usado se planteo dar un pequeño descuento entre el 5-10% para los juegos usados.
 
