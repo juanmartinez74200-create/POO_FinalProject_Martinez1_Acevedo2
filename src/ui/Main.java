@@ -88,10 +88,12 @@ public class Main {
         }
     }
 
+    // SECCION DE LA CLASE VIDEOJUEGOS
+
     private static void registerVideoGame() {
 
-        Console.writeLine("1. Videojuego fisico");
-        Console.writeLine("2. Videojuego digital");
+        Console.writeLine(" 1. Videojuego fisico ");
+        Console.writeLine(" 2. Videojuego digital ");
 
         int option = 0;
         option = Integer.parseInt(Console.readLine("Selecciona el tipo de juego"));
@@ -116,8 +118,17 @@ public class Main {
         boolean activate = false;
         int stock = 0;
         String condition = "";
+        VideoGame videoGame;
 
-        id = Integer.parseInt(Console.readLine("Ingrese el id : "));
+        do {
+            id = Integer.parseInt(Console.readLine("Ingrese el id : "));
+            videoGame = store.searchVideoGame(id);
+            if (videoGame != null) {
+                Console.writeLine("Este Id ya esta asignado a un videojuego,intente con otro");
+            }
+
+        } while (videoGame != null);
+
         title = Console.readLine("Ingrese el título : ");
         developer = Console.readLine("Ingrese el desarrollador : ");
         releaseYear = Integer.parseInt(Console.readLine("Ingrese el año de lanzamiento : "));
@@ -141,7 +152,7 @@ public class Main {
             }
         } while (gender == null);
 
-        activate = Boolean.parseBoolean(Console.readLine("¿El videojuego esta activado? (true/false) "));
+        activate = Boolean.parseBoolean(Console.readLine("¿El videojuego esta activado? (true/false) : "));
         stock = Integer.parseInt(Console.readLine("Ingrese el stock : "));
         condition = Console.readLine("Ingrese la condición (NEW o USED) : ");
 
@@ -162,8 +173,16 @@ public class Main {
         int availableLicenses = 0;
         boolean activate = false;
         float downloadSize = 0;
+        VideoGame videoGame;
+        do {
+            id = Integer.parseInt(Console.readLine("Ingrese el id : "));
+            videoGame = store.searchVideoGame(id);
+            if (videoGame != null) {
+                Console.writeLine("El Id ya se encuentra en uso,intentelo nuevamente");
+            }
 
-        id = Integer.parseInt(Console.readLine("Ingrese el id : "));
+        } while (videoGame != null);
+
         title = Console.readLine("Ingrese el título : ");
         developer = Console.readLine("Ingrese el desarrollador : ");
         releaseYear = Integer.parseInt(Console.readLine("Ingrese el año de lanzamiento : "));
@@ -171,7 +190,7 @@ public class Main {
 
         showPlatforms();
         do {
-            platformId = Integer.parseInt(Console.readLine("Ingrese el id de la plataforma: "));
+            platformId = Integer.parseInt(Console.readLine("Ingrese el id de la plataforma : "));
             platform = store.searchPlatform(platformId);
             if (platform == null) {
                 Console.writeLine("La plataforma seleccionada no existe");
@@ -180,7 +199,7 @@ public class Main {
 
         showGenders();
         do {
-            genderId = Integer.parseInt(Console.readLine("Ingrese el id del género: "));
+            genderId = Integer.parseInt(Console.readLine("Ingrese el id del género : "));
             gender = store.searchGender(genderId);
             if (gender == null) {
                 Console.writeLine("El genero seleccionado no es valido");
@@ -201,29 +220,29 @@ public class Main {
 
         showVideoGames();
         do {
-            id = Integer.parseInt(Console.readLine("Ingrese el id del videojuego que desea buscar: "));
+            id = Integer.parseInt(Console.readLine("Ingrese el id del videojuego que desea buscar : "));
             videoGame = store.searchVideoGame(id);
 
             if (videoGame == null) {
                 Console.writeLine("El videojuego seleccionado no existe");
             }
         } while (videoGame == null);
-
+        Console.writeLine("");
         Console.writeLine("id : " + videoGame.getId());
         Console.writeLine("Título : " + videoGame.getTitle());
         Console.writeLine("Desarrollador : " + videoGame.getDeveloper());
         Console.writeLine("Año de lanzamiento : " + videoGame.getReleaseYear());
         Console.writeLine("Precio base : " + videoGame.getBasePrice());
         Console.writeLine("Precio de venta : " + videoGame.calculateSellingPrice());
-        Console.writeLine("Genero: " + videoGame.getGender().getName());
-        Console.writeLine("Plataforma: " + videoGame.getPlatform().getName());
+        Console.writeLine("Genero : " + videoGame.getGender().getName());
+        Console.writeLine("Plataforma : " + videoGame.getPlatform().getName());
 
         if (videoGame instanceof PhysicalGame physical) {
-            Console.writeLine("La condicion es :" + physical.getCondition());
-            Console.writeLine("La cantidad de stock es :" + physical.getStock());
+            Console.writeLine("La condicion es : " + physical.getCondition());
+            Console.writeLine("La cantidad de stock es : " + physical.getStock());
         } else if (videoGame instanceof DigitalGame digital) {
-            Console.writeLine("El peso del Videojuego :" + digital.getDownloadSize());
-            Console.writeLine("La cantidad de licencias disponibles :" + digital.getAvailableLicenses());
+            Console.writeLine("El peso del Videojuego : " + digital.getDownloadSize());
+            Console.writeLine("La cantidad de licencias disponibles : " + digital.getAvailableLicenses());
         }
     }
 
@@ -259,9 +278,24 @@ public class Main {
         boolean activate = false;
         int stock = 0;
         String condition = "";
+        VideoGame videoGame=store.searchVideoGame(id);
+        //Cuando quiero modificar algo en especifico y no todo el juego hago esto
 
         title = Console.readLine("Ingrese el nuevo título : ");
+        if (title.isEmpty()) {
+            title=videoGame.getTitle();
+        }else{
+            videoGame.setTitle(title);
+        }
+        
         developer = Console.readLine("Ingrese el nuevo desarrollador : ");
+
+        if(developer.isEmpty()){
+            developer=videoGame.getDeveloper();
+        }else{
+            videoGame.setDeveloper(developer);
+        }
+
         releaseYear = Integer.parseInt(Console.readLine("Ingrese el nuevo año de lanzamiento : "));
         basePrice = Float.parseFloat(Console.readLine("Ingrese el nuevo precio base : "));
 
@@ -283,9 +317,9 @@ public class Main {
             }
         } while (gender == null);
 
-        activate = Boolean.parseBoolean(Console.readLine("¿El videojuego está activo? (true/false): "));
+        activate = Boolean.parseBoolean(Console.readLine("¿El videojuego está activo? (true/false) : "));
         stock = Integer.parseInt(Console.readLine("Ingrese el nuevo stock : "));
-        condition = Console.readLine("Ingrese la nueva condición (NEW o USED): ");
+        condition = Console.readLine("Ingrese la nueva condición (NEW o USED) : ");
         store.modifyPhysicalVideoGame(id, title, developer, releaseYear, basePrice,
                 platform, gender, activate, stock, condition);
     }
@@ -304,6 +338,7 @@ public class Main {
         int availableLicenses = 0;
 
         title = Console.readLine("Ingrese el nuevo título : ");
+
         developer = Console.readLine("Ingrese el nuevo desarrollador : ");
         releaseYear = Integer.parseInt(Console.readLine("Ingrese el nuevo año de lanzamiento : "));
         basePrice = Float.parseFloat(Console.readLine("Ingrese el nuevo precio base : "));
@@ -341,6 +376,8 @@ public class Main {
         store.deleteVideoGame(id);
     }
 
+    // SECCION DE LA CLASE EMPLOYEE
+
     private static void registerEmployee() {
         int id = 0;
         String name = "";
@@ -363,8 +400,8 @@ public class Main {
             }
         } while (employee == null);
 
-        Console.writeLine("id: " + employee.getId());
-        Console.writeLine("name: " + employee.getName());
+        Console.writeLine("id : " + employee.getId());
+        Console.writeLine("name : " + employee.getName());
     }
 
     private static void modifyEmployee() {
@@ -385,6 +422,8 @@ public class Main {
         id = Integer.parseInt(Console.readLine("Ingrese el id de el empleado que desea eliminar"));
         store.deleteEmployee(id);
     }
+
+    // SECCION DE LA CLASE VENTA
 
     private static void registerSale() {
         int saleId = 0;
@@ -443,14 +482,16 @@ public class Main {
             }
         } while (sale == null);
 
-        Console.writeLine("Id de la venta: " + sale.getSaleId());
-        Console.writeLine("Cantidad: " + sale.getAmount());
-        Console.writeLine("Empleado: " + sale.getEmployee().getName());
-        Console.writeLine("Cliente: " + sale.getCustomer().getName());
-        Console.writeLine("Videojuego: " + sale.getVideoGame().getTitle());
-        Console.writeLine("Total: " + sale.totalPurchase());
+        Console.writeLine("Id de la venta : " + sale.getSaleId());
+        Console.writeLine("Cantidad : " + sale.getAmount());
+        Console.writeLine("Empleado : " + sale.getEmployee().getName());
+        Console.writeLine("Cliente : " + sale.getCustomer().getName());
+        Console.writeLine("Videojuego : " + sale.getVideoGame().getTitle());
+        Console.writeLine("Total : " + sale.totalPurchase());
 
     }
+
+    // SECCION DE LA CLASE CLIENTE
 
     private static void registerCustomer() {
         int id = 0;
@@ -480,10 +521,10 @@ public class Main {
             }
         } while (customer == null);
 
-        Console.writeLine("id: " + customer.getId());
-        Console.writeLine("nombre: " + customer.getName());
-        Console.writeLine("numero de telefono: " + customer.getPhoneNumber());
-        Console.writeLine("email: " + customer.getEmail());
+        Console.writeLine("id : " + customer.getId());
+        Console.writeLine("nombre : " + customer.getName());
+        Console.writeLine("numero de telefono : " + customer.getPhoneNumber());
+        Console.writeLine("email : " + customer.getEmail());
     }
 
     private static void modifyCustomer() {
@@ -508,6 +549,8 @@ public class Main {
         id = Integer.parseInt(Console.readLine("Ingrese el id de el cliente que desea eliminar"));
         store.deleteCustomer(id);
     }
+
+    // SECCION DE LA CLASE DE RECIBO O COMPROBANTE
 
     private static void registerReceipt() {
         int id = 0;
@@ -543,10 +586,12 @@ public class Main {
             }
         } while (receipt == null);
 
-        Console.writeLine("id del recibo: " + receipt.getReceiptId());
-        Console.writeLine("id de la venta: " + receipt.getSale().getSaleId());
-        Console.writeLine("total de la venta: " + receipt.getSale().totalPurchase());
+        Console.writeLine("id del recibo : " + receipt.getReceiptId());
+        Console.writeLine("id de la venta : " + receipt.getSale().getSaleId());
+        Console.writeLine("total de la venta : " + receipt.getSale().totalPurchase());
     }
+
+    // SECCION CLASE GENERO
 
     private static void registerGender() {
         int id = 0;
@@ -554,8 +599,8 @@ public class Main {
         float surchargePercentage = 0;
 
         showGenders();
-        id = Integer.parseInt(Console.readLine("Ingrese el id del genero: "));
-        name = Console.readLine("Ingrese el nombre del genero: ");
+        id = Integer.parseInt(Console.readLine("Ingrese el id del genero : "));
+        name = Console.readLine("Ingrese el nombre del genero : ");
         surchargePercentage = Float.parseFloat(Console.readLine("ingrese el porcentaje adiciona : "));
         store.registerGender(id, name, surchargePercentage);
     }
@@ -573,10 +618,12 @@ public class Main {
             }
         } while (gender == null);
 
-        Console.writeLine("id: " + gender.getGenderId());
-        Console.writeLine("Nombre del genero: " + gender.getName());
-        Console.writeLine("porcentaje adicional: " + gender.getSurchargePercentage());
+        Console.writeLine("id : " + gender.getGenderId());
+        Console.writeLine("Nombre del genero : " + gender.getName());
+        Console.writeLine("porcentaje adicional : " + gender.getSurchargePercentage());
     }
+
+    // SECCION DE LA CLASE DE PLATAFORMA
 
     private static void registerPlatform() {
         int id = 0;
@@ -591,7 +638,7 @@ public class Main {
                 Console.writeLine("Id para plataforma en uso ");
             }
         } while (platform != null);
-        
+
         name = Console.readLine("ingrese el nombre de la plataforma");
         surchargePercentage = Float.parseFloat(Console.readLine("ingrese el porcentaje de recargo de la plataforma"));
         store.registerPlatform(id, name, surchargePercentage);
@@ -610,9 +657,9 @@ public class Main {
             }
         } while (platform == null);
 
-        Console.writeLine("id: " + platform.getPlatformId());
-        Console.writeLine("nombre: " + platform.getName());
-        Console.writeLine("Porcentaje adicional: " + platform.getSurchargePercentage());
+        Console.writeLine("id : " + platform.getPlatformId());
+        Console.writeLine("nombre : " + platform.getName());
+        Console.writeLine("Porcentaje adicional : " + platform.getSurchargePercentage());
     }
 
     private static void modifyPlatform() {
@@ -641,7 +688,7 @@ public class Main {
         Console.writeLine("==platafromas registradas==");
 
         for (Platform platform : store.listPlatforms()) {
-            Console.writeLine("id : " + platform.getPlatformId() + "nombre : " + platform.getName());
+            Console.writeLine("id : " + platform.getPlatformId() + " Nombre : " + platform.getName());
         }
         Console.writeLine("");
     }
@@ -650,49 +697,54 @@ public class Main {
         Console.writeLine("==Generos registrados==");
 
         for (Gender gender : store.listGenders()) {
-            Console.writeLine("id : " + gender.getGenderId() + "Nombre : " + gender.getName());
+            Console.writeLine("id : " + gender.getGenderId() + " Nombre : " + gender.getName());
         }
-
+        Console.writeLine("");
     }
 
     private static void showVideoGames() {
         Console.writeLine("==Videojuegos registrados==");
 
         for (VideoGame videoGame : store.listVideoGames()) {
-            Console.writeLine("id: " + videoGame.getId() + "Nombre : " + videoGame.getTitle());
+            Console.writeLine("id : " + videoGame.getId() + " Nombre : " + videoGame.getTitle());
         }
+        Console.writeLine("");
     }
 
     private static void showEmployees() {
         Console.writeLine("==Empleados registrados==");
 
         for (Employee employee : store.listEmployees()) {
-            Console.writeLine("id : " + employee.getId() + "Nombre : " + employee.getName());
+            Console.writeLine("id : " + employee.getId() + " Nombre : " + employee.getName());
         }
+        Console.writeLine("");
     }
 
     private static void showCustomers() {
         Console.writeLine("==Clientes registrados==");
 
         for (Customer customer : store.listCustomers()) {
-            Console.writeLine("id : " + customer.getId() + "Nombre : " + customer.getName());
+            Console.writeLine("id : " + customer.getId() + " Nombre : " + customer.getName());
         }
+        Console.writeLine("");
     }
 
     private static void showSales() {
-        Console.writeLine("Ventas registradas");
+        Console.writeLine("==Ventas registradas==");
 
         for (Sale sale : store.listSales()) {
             Console.writeLine("id de venta : " + sale.getSaleId());
         }
+        Console.writeLine("");
     }
 
     private static void showReceipts() {
         Console.writeLine("== Recibos registrados ==");
 
         for (Receipt receipt : store.listReceipts()) {
-            Console.writeLine("id del recibo : " + receipt.getReceiptId());
+            Console.writeLine(" id del recibo : " + receipt.getReceiptId());
         }
+        Console.writeLine("");
     }
 
 }
